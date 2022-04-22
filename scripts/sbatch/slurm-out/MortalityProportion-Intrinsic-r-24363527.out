@@ -1,0 +1,341 @@
+Warning messages:
+1: In checkMatrixPackageVersion() :
+  Package version inconsistency detected.
+TMB was built with Matrix version 1.4.0
+Current Matrix version is 1.4.1
+Please re-install 'TMB' from source using install.packages('TMB', type = 'source') or ask CRAN for a binary version of 'TMB' matching CRAN's 'Matrix' package
+2: In checkDepPackageVersion(dep_pkg = "TMB") :
+  Package version inconsistency detected.
+glmmTMB was built with TMB version 1.8.0
+Current TMB version is 1.8.1
+Please re-install glmmTMB from source or restore original ‘TMB’ package (see '?reinstalling' for more information)
+[1] "####################################################"
+[1] "Mortality Proportion"
+[1] "Binomial"
+[1] "############################# LEVEL 1 ##########################"
+[1] "Fit 1"
+[1] "####################################################"
+
+Call:
+glm(formula = MortalityProportion ~ 1, family = binomial(), data = df, 
+    weights = Inventory, na.action = na.exclude)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0822  -1.3908  -0.7853   0.3678   9.7152  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -7.54356    0.01825  -413.3   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 5550.6  on 3005  degrees of freedom
+Residual deviance: 5550.6  on 3005  degrees of freedom
+  (6 observations deleted due to missingness)
+AIC: 8989.8
+
+Number of Fisher Scoring iterations: 5
+
+[1] "The AIC of this model fit is 8989.84037384964"
+[1] "####################################################"
+[1] "############################# LEVEL 2 ##########################"
+[1] "Fit 2"
+[1] "####################################################"
+
+Call:
+glm(formula = MortalityProportion ~ Days, family = binomial(), 
+    data = df, weights = Inventory, na.action = na.exclude)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.3051  -1.2603  -0.7571   0.4036   9.5250  
+
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -7.3054295  0.0302665 -241.37   <2e-16 ***
+Days        -0.0043350  0.0004692   -9.24   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 5550.6  on 3005  degrees of freedom
+Residual deviance: 5460.2  on 3004  degrees of freedom
+  (6 observations deleted due to missingness)
+AIC: 8901.4
+
+Number of Fisher Scoring iterations: 5
+
+[1] "The AIC of this model fit is 8901.41354763656"
+[1] "####################################################"
+[1] "Fit 3"
+[1] "####################################################"
+
+Call:
+glm(formula = MortalityProportion ~ Days + I(Days^2), family = binomial(), 
+    data = df, weights = Inventory, na.action = na.exclude)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.2533  -1.2629  -0.7205   0.3932   9.5074  
+
+Coefficients:
+              Estimate Std. Error  z value Pr(>|z|)    
+(Intercept) -7.374e+00  4.555e-02 -161.869   <2e-16 ***
+Days        -1.290e-03  1.568e-03   -0.823   0.4105    
+I(Days^2)   -2.137e-05  1.054e-05   -2.027   0.0427 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 5550.6  on 3005  degrees of freedom
+Residual deviance: 5456.0  on 3003  degrees of freedom
+  (6 observations deleted due to missingness)
+AIC: 8899.2
+
+Number of Fisher Scoring iterations: 5
+
+[1] "The AIC of this model fit is 8899.2167070344"
+[1] "####################################################"
+[1] "Fit 4"
+[1] "####################################################"
+
+Call:
+glm(formula = MortalityProportion ~ Days + I(Days^2) + I(Days^3), 
+    family = binomial(), data = df, weights = Inventory, na.action = na.exclude)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.2747  -1.1872  -0.7697   0.4557   9.2930  
+
+Coefficients:
+              Estimate Std. Error  z value Pr(>|z|)    
+(Intercept) -7.727e+00  6.222e-02 -124.181  < 2e-16 ***
+Days         2.431e-02  3.230e-03    7.528 5.16e-14 ***
+I(Days^2)   -4.326e-04  4.530e-05   -9.549  < 2e-16 ***
+I(Days^3)    1.702e-06  1.759e-07    9.679  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 5550.6  on 3005  degrees of freedom
+Residual deviance: 5373.9  on 3002  degrees of freedom
+  (6 observations deleted due to missingness)
+AIC: 8819.1
+
+Number of Fisher Scoring iterations: 5
+
+[1] "The AIC of this model fit is 8819.11097819794"
+[1] "####################################################"
+[1] "############################# LEVEL 3 ##########################"
+[1] "Fit 5"
+[1] "####################################################"
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: MortalityProportion ~ (1 + Days | Site)
+   Data: df
+Weights: Inventory
+
+     AIC      BIC   logLik deviance df.resid 
+  8660.9   8685.0  -4326.5   8652.9     3002 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.7521 -0.8891 -0.5475  0.3245 19.6835 
+
+Random effects:
+ Groups Name        Variance  Std.Dev. Corr 
+ Site   (Intercept) 2.497e-02 0.158021      
+        Days        4.702e-05 0.006857 -0.20
+Number of obs: 3006, groups:  Site, 6
+
+Fixed effects:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -7.37286    0.08993  -81.98   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] "The AIC of this model fit is 8660.9475772832"
+[1] "####################################################"
+[1] "Fit 6"
+[1] "####################################################"
+boundary (singular) fit: see help('isSingular')
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: MortalityProportion ~ (1 + Days + I(Days^2) | Site)
+   Data: df
+Weights: Inventory
+
+     AIC      BIC   logLik deviance df.resid 
+  8544.9   8587.0  -4265.5   8530.9     2999 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.7415 -0.8803 -0.5366  0.4364 19.5873 
+
+Random effects:
+ Groups Name        Variance  Std.Dev.  Corr       
+ Site   (Intercept) 2.801e-01 0.5292083            
+        Days        7.596e-04 0.0275609 -0.92      
+        I(Days^2)   3.471e-08 0.0001863  0.97 -0.96
+Number of obs: 3006, groups:  Site, 6
+
+Fixed effects:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -7.31997    0.06692  -109.4   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
+[1] "The AIC of this model fit is 8544.90082818534"
+[1] "####################################################"
+[1] "Fit 7"
+[1] "####################################################"
+boundary (singular) fit: see help('isSingular')
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: MortalityProportion ~ (1 + Days + I(Days^2) + I(Days^3) | Site)
+   Data: df
+Weights: Inventory
+
+     AIC      BIC   logLik deviance df.resid 
+  8465.6   8531.7  -4221.8   8443.6     2995 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.7015 -0.8174 -0.5159  0.5392 17.4718 
+
+Random effects:
+ Groups Name        Variance  Std.Dev.  Corr             
+ Site   (Intercept) 5.028e+00 2.242e+00                  
+        Days        1.344e-02 1.159e-01 -1.00            
+        I(Days^2)   8.598e-06 2.932e-03  0.82 -0.82      
+        I(Days^3)   2.346e-10 1.532e-05 -0.74  0.74 -0.99
+Number of obs: 3006, groups:  Site, 6
+
+Fixed effects:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -7.37107    0.09823  -75.04   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
+[1] "The AIC of this model fit is 8465.57254841788"
+[1] "####################################################"
+[1] "############################# LEVEL 4 ##########################"
+[1] "Fit 8"
+[1] "####################################################"
+Warning message:
+In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: MortalityProportion ~ (1 + Days | Site_Room_Turn)
+   Data: df
+Weights: Inventory
+
+     AIC      BIC   logLik deviance df.resid 
+  8325.6   8349.7  -4158.8   8317.6     3002 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.8819 -0.8269 -0.5079  0.4511 14.2141 
+
+Random effects:
+ Groups         Name        Variance  Std.Dev. Corr 
+ Site_Room_Turn (Intercept) 0.4563936 0.67557       
+                Days        0.0001385 0.01177  -0.77
+Number of obs: 3006, groups:  Site_Room_Turn, 26
+
+Fixed effects:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -7.52108    0.08881  -84.69   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model is nearly unidentifiable: very large eigenvalue
+ - Rescale variables?
+
+[1] "The AIC of this model fit is 8325.63498302691"
+[1] "####################################################"
+[1] "Fit 9"
+[1] "####################################################"
+boundary (singular) fit: see help('isSingular')
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: MortalityProportion ~ (1 + Days + I(Days^2) | Site_Room_Turn)
+   Data: df
+Weights: Inventory
+
+     AIC      BIC   logLik deviance df.resid 
+  8363.3   8405.3  -4174.6   8349.3     2999 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.9033 -0.8085 -0.5297  0.5027 12.7111 
+
+Random effects:
+ Groups         Name        Variance  Std.Dev. Corr       
+ Site_Room_Turn (Intercept) 2.972e+00 1.723843            
+                Days        1.671e-01 0.408761  0.80      
+                I(Days^2)   1.341e-05 0.003662 -0.81 -1.00
+Number of obs: 3006, groups:  Site_Room_Turn, 26
+
+Fixed effects:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -7.8629     0.1456     -54   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
+[1] "The AIC of this model fit is 8363.2720808286"
+[1] "####################################################"
+[1] "Fit 10"
+[1] "####################################################"
+boundary (singular) fit: see help('isSingular')
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+MortalityProportion ~ (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn)
+   Data: df
+Weights: Inventory
+
+     AIC      BIC   logLik deviance df.resid 
+  8549.6   8615.7  -4263.8   8527.6     2995 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.0079 -0.7715 -0.4976  0.5238 12.3991 
+
+Random effects:
+ Groups         Name        Variance  Std.Dev. Corr             
+ Site_Room_Turn (Intercept) 2.092e+01 4.57403                   
+                Days        1.356e+01 3.68194  -0.98            
+                I(Days^2)   6.704e-03 0.08188  -0.97  1.00      
+                I(Days^3)   1.012e-04 0.01006  -0.97  1.00  1.00
+Number of obs: 3006, groups:  Site_Room_Turn, 26
+
+Fixed effects:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -7.7852     0.1234  -63.09   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
+[1] "The AIC of this model fit is 8549.57438990171"
+[1] "####################################################"

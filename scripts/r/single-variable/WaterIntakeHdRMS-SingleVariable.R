@@ -1,6 +1,5 @@
 library(dplyr)
 library(lmerTest)
-library(lmtest)
 library(tidyr)
 
 rm(list = ls())

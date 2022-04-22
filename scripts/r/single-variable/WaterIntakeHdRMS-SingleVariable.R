@@ -52,7 +52,7 @@ for (i in c(4:ncol(df2))) {
 df_out <- bind_rows(fit_list)
 
 write.csv(df_out,
-          file = "/group/deckerlab/cjgwx7/sensor-data/results/WaterIntakeHdRMS-SingleVariable.csv", # nolint
+          file = "/group/deckerlab/cjgwx7/sensor-data/results/single-variable/WaterIntakeHdRMS-SingleVariable.csv", # nolint
           sep = ",",
           row.names = FALSE,
           col.names = TRUE)

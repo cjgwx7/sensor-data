@@ -4,8 +4,8 @@
 #SBATCH -n 1
 #SBATCH -c 1
 #SBATCH -A animalsci
-#SBATCH --mem 5G
-#SBATCH -t 00-00:10
+#SBATCH --mem 1G
+#SBATCH -t 00-00:30
 #SBATCH -o slurm-out/ReHS-SingleVariable-r-%j.out
 #SBATCH --mail-type END
 #SBATCH --mail-user cgrohmann@mail.missouri.edu

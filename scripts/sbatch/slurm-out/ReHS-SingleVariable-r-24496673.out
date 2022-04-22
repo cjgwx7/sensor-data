@@ -1,0 +1,99 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: lme4
+Loading required package: Matrix
+
+Attaching package: ‘lmerTest’
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:stats’:
+
+    step
+
+
+Attaching package: ‘tidyr’
+
+The following objects are masked from ‘package:Matrix’:
+
+    expand, pack, unpack
+
+Note: Using an external vector in selections is ambiguous.
+ℹ Use `all_of(i)` instead of `i` to silence this message.
+ℹ See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
+This message is displayed once per session.
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Euth was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Dead was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable TotalMortality was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable MortalityProportion was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Penicillin was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Dexamethasone was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Ceftiofur was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Enroflaxin was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Tetracycline was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Lincomycin was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable OtherTreatments was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable TotalTreatments was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable TreatmentProportion was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable WaterMedications was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable WaterIntakeRMS was successfully fit."
+[1] "The model for variable WaterIntakeHdRMS was successfully fit."
+[1] "The model for variable WaterIntakeVC was successfully fit."
+[1] "The model for variable WaterIntakeHdVC was successfully fit."
+[1] "The model for variable TempReHS was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable LowTempRMS was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable HiTempRMS was successfully fit."
+[1] "The model for variable TempRangeRMS was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SetPointRMS was successfully fit."
+[1] "The model for variable LowTempVC was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable AvgTempVC was successfully fit."
+[1] "The model for variable HiTempVC was successfully fit."
+[1] "The model for variable TempRangeVC was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SetPointVC was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Days_Lag1 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Inventory_Lag1 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Euth_Lag1 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable Dead_Lag1 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable TotalMortality_Lag1 was successfully fit."

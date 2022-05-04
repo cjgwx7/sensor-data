@@ -1,4 +1,4 @@
-/var/spool/slurmd/job24547644/slurm_script: line 13: activate: No such file or directory
+/var/spool/slurmd/job24547714/slurm_script: line 13: activate: No such file or directory
 
 Attaching package: ‘dplyr’
 
@@ -39,6 +39,7 @@ The following objects are masked from ‘package:Matrix’:
 
     expand, pack, unpack
 
+[1] "TotalMortality"
 [1] "Model Level1_glm started"
 [1] "Model Level1_glm finished"
 [1] "Model Level1_oinv_glm started"
@@ -78,3 +79,7 @@ boundary (singular) fit: see help('isSingular')
 
 [1] "Model Level3_b_inv_glmer finished"
 [1] "Model Level3_c_glmer started"
+boundary (singular) fit: see help('isSingular')
+
+[1] "Model Level3_c_glmer finished"
+[1] "Model Level3_c_inv_glmer started"

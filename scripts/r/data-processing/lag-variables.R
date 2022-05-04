@@ -4,6 +4,11 @@ rm(list = ls())
 
 load("/storage/hpc/group/deckerlab/cjgwx7/sensor-data/data/master-file-clean.RData") # nolint
 
+df <- df %>%
+    dplyr::mutate(PrimaryRespiratory = Ceftiofur + Enroflaxin + Tetracycline,
+                  SecondaryRespiratory = Penicillin + Dexamethasone + Lincomycin) %>% # nolint
+    dplyr::select(Order:WaterMedicationType, PrimaryRespiratory:SecondaryRespiratory, ReHS:Comments) # nolint
+
 df = df %>% # nolint
     dplyr::group_by(Site_Room_Turn) %>%
     dplyr::mutate(across(c(Days:WaterMedications, ReHS:SetPointVC), ~ dplyr::lag(.x, 1), .names = "{.col}_Lag1")) %>% # nolint

@@ -5,10 +5,10 @@
 #SBATCH -c 1
 #SBATCH -A animalsci
 #SBATCH --mem 5G
-#SBATCH -t 00-01:00
+#SBATCH -t 00-05:00
 #SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/sbatch/slurm-out/TotalMortality/TotalMortality-Intrinsic-NegativeBinomial-r-%j.out
 #SBATCH --mail-type END
 #SBATCH --mail-user cgrohmann@mail.missouri.edu
 
 source activate r-sensors
-Rscript /group/deckerlab/cjgwx7/sensor-data/scripts/r/intrinsic-models/NegativeBinomialTotalMortality.R TotalMortality
+Rscript /group/deckerlab/cjgwx7/sensor-data/scripts/r/intrinsic-models/TotalMortality/NegativeBinomialTotalMortality.R TotalMortality

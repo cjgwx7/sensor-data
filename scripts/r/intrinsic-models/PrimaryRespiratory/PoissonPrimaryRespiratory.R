@@ -33,7 +33,7 @@ model_list <- list(Level1_glm = formula(variable ~ 1),
                    Level3_b_glmer = formula(variable ~ (1 + Days + I(Days^2) | Site)), # nolint
                    Level3_b_oinv_glmer = formula(variable ~ (1 + Days + I(Days^2) | Site) + offset(log(Inventory))), # nolint
                    Level3_b_inv_glmer = formula(variable ~ (1 + Days + I(Days^2) | Site) + log(Inventory)), # nolint
-                   Level3_c_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site)), # nolint
+                   #Level3_c_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site)), # nolint
                    Level3_c_oinv_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site) + offset(log(Inventory))), # nolint
                    Level3_c_inv_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site) + log(Inventory)), # nolint
                    Level4_a_glmer = formula(variable ~ (1 + Days | Site_Room_Turn)), # nolint
@@ -41,10 +41,10 @@ model_list <- list(Level1_glm = formula(variable ~ 1),
                    Level4_a_inv_glmer = formula(variable ~ (1 + Days | Site_Room_Turn) + log(Inventory)), # nolint
                    Level4_b_glmer = formula(variable ~ (1 + Days + I(Days^2) | Site_Room_Turn)), # nolint
                    Level4_b_oinv_glmer = formula(variable ~ (1 + Days + I(Days^2) | Site_Room_Turn) + offset(log(Inventory))), # nolint
-                   Level4_b_inv_glmer = formula(variable ~ (1 + Days + I(Days^2) | Site_Room_Turn) + log(Inventory)), # nolint
-                   Level4_c_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn)), # nolint
-                   Level4_c_oinv_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn) + offset(log(Inventory))), # nolint
-                   Level4_c_inv_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn) + log(Inventory))) # nolint
+                   Level4_b_inv_glmer = formula(variable ~ (1 + Days + I(Days^2) | Site_Room_Turn) + log(Inventory))) # nolint
+                   #Level4_c_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn)), # nolint
+                   #Level4_c_oinv_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn) + offset(log(Inventory))), # nolint
+                   #Level4_c_inv_glmer = formula(variable ~ (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn) + log(Inventory))) # nolint
 
 model_summary_list <- list()
 

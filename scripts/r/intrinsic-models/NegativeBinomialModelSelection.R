@@ -8,6 +8,7 @@ rm(list = ls())
 load("/storage/hpc/group/deckerlab/cjgwx7/sensor-data/data/master-file-clean.RData") # nolint
 
 variable <- commandArgs(trailingOnly = TRUE)[1]
+print(variable)
 
 df <- df %>%
     dplyr::ungroup(.) %>%

@@ -22,13 +22,13 @@ for (i in c(5:ncol(df2))) {
         cbind(., df3) %>%
         tidyr::drop_na(.)
 
-    null_fit <- glmer(TreatmentProportion ~ (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn), # nolint
+    null_fit <- glmer(TreatmentProportion ~ (1 + Days + I(Days^2) | Site_Room_Turn), # nolint
                       family = binomial,
                       weights = Inventory,
                       data = fit_df)
 
     ind_var <- colnames(fit_df)[5]
-    fit_formula <- formula(paste("TreatmentProportion ~ ", ind_var, " + (1 + Days + I(Days^2) + I(Days^3) | Site_Room_Turn)", sep = "")) # nolint
+    fit_formula <- formula(paste("TreatmentProportion ~ ", ind_var, " + (1 + Days + I(Days^2) | Site_Room_Turn)", sep = "")) # nolint
     fit <- glmer(fit_formula,
                  family = binomial,
                  weights = Inventory,

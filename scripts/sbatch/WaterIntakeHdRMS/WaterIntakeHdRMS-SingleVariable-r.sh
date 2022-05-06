@@ -5,8 +5,8 @@
 #SBATCH -c 1
 #SBATCH -A animalsci
 #SBATCH --mem 1G
-#SBATCH -t 00-00:10
-#SBATCH -o slurm-out/WaterIntakeHdRMS-SingleVariable-r-%j.out
+#SBATCH -t 00-00:30
+#SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/sbatch/slurm-out/WaterIntakeHdRMS/WaterIntakeHdRMS-SingleVariable-r-%j.out
 #SBATCH --mail-type END
 #SBATCH --mail-user cgrohmann@mail.missouri.edu
 

@@ -22,34 +22,24 @@ for (i in c(5:ncol(df2))) {
         cbind(., df3) %>%
         tidyr::drop_na(.)
 
-    null_fit <- glmer(TreatmentProportion ~ (1 + Days + I(Days^2) | Site_Room_Turn), # nolint
-                      family = binomial,
-                      weights = Inventory,
-                      data = fit_df)
-
     ind_var <- colnames(fit_df)[5]
+
+    print(paste("The model for variable", ind_var, "was initiated at", Sys.time(), sep = " ")) # nolint
+
     fit_formula <- formula(paste("TreatmentProportion ~ ", ind_var, " + (1 + Days + I(Days^2) | Site_Room_Turn)", sep = "")) # nolint
     fit <- glmer(fit_formula,
                  family = binomial,
                  weights = Inventory,
                  data = fit_df)
     fit_summary <- coef(summary(fit))
-    fit_lrt <- anova(null_fit, fit)
     summary_df <- data.frame(DepVar = "TreatmentProportion",
                              IndVar = ind_var,
                              Estimate = fit_summary[2, 1],
                              SE = fit_summary[2, 2],
                              WaldZ_Statistic = fit_summary[2, 3],
-                             WaldTest_P = fit_summary[2, 4],
-                             N_Parameters = fit_lrt[2, 1],
-                             NullAIC = fit_lrt[1, 2],
-                             TestAIC = fit_lrt[2, 2],
-                             NullLikelihood = fit_lrt[1, 4],
-                             FitLikelihood = fit_lrt[2, 4],
-                             LRT_Statistic = fit_lrt[2, 6],
-                             LRTdf = fit_lrt[2, 7],
-                             LRT_P = fit_lrt[2, 8])
+                             WaldTest_P = fit_summary[2, 4])
     fit_list[[i]] <- summary_df
+
     print(paste("The model for variable", ind_var, "was successfully fit.", sep = " ")) # nolint
 
 }

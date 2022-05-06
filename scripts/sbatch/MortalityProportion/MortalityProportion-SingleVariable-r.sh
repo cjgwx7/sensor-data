@@ -6,7 +6,7 @@
 #SBATCH -A animalsci
 #SBATCH --mem 5G
 #SBATCH -t 00-01:00
-#SBATCH -o slurm-out/MortalityProportion-SingleVariable-r-%j.out
+#SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/sbatch/slurm-out/MortalityProportion/MortalityProportion-SingleVariable-r-%j.out
 #SBATCH --mail-type END
 #SBATCH --mail-user cgrohmann@mail.missouri.edu
 

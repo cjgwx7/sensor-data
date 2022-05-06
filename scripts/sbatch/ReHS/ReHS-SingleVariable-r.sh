@@ -6,7 +6,7 @@
 #SBATCH -A animalsci
 #SBATCH --mem 1G
 #SBATCH -t 00-00:30
-#SBATCH -o slurm-out/ReHS-SingleVariable-r-%j.out
+#SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/sbatch/slurm-out/ReHS/ReHS-SingleVariable-r-%j.out
 #SBATCH --mail-type END
 #SBATCH --mail-user cgrohmann@mail.missouri.edu
 

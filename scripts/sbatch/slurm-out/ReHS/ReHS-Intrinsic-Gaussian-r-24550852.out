@@ -1,0 +1,73 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: lme4
+Loading required package: Matrix
+
+Attaching package: ‘lmerTest’
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:stats’:
+
+    step
+
+
+Attaching package: ‘tidyr’
+
+The following objects are masked from ‘package:Matrix’:
+
+    expand, pack, unpack
+
+[1] "ReHS"
+[1] "Model Level1_lm started"
+[1] "Model Level1_lm finished"
+[1] "Model Level2_a_lm started"
+[1] "Model Level2_a_lm finished"
+[1] "Model Level2_b_lm started"
+[1] "Model Level2_b_lm finished"
+[1] "Model Level2_c_lm started"
+[1] "Model Level2_c_lm finished"
+[1] "Model Level3_a_lmer started"
+[1] "Model Level3_a_lmer finished"
+[1] "Model Level3_b_lmer started"
+boundary (singular) fit: see help('isSingular')
+[1] "Model Level3_b_lmer finished"
+[1] "Model Level3_c_lmer started"
+boundary (singular) fit: see help('isSingular')
+[1] "Model Level3_c_lmer finished"
+[1] "Model Level4_a_lmer started"
+[1] "Model Level4_a_lmer finished"
+[1] "Model Level4_b_lmer started"
+[1] "Model Level4_b_lmer finished"
+[1] "Model Level4_c_lmer started"
+boundary (singular) fit: see help('isSingular')
+[1] "Model Level4_c_lmer finished"
+Warning messages:
+1: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge with max|grad| = 0.760526 (tol = 0.002, component 1)
+2: Model failed to converge with 1 negative eigenvalue: -2.6e+06 
+3: Model failed to converge with 4 negative eigenvalues: -6.8e+00 -9.2e+00 -2.3e+04 -8.4e+06 
+4: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge with max|grad| = 0.0215662 (tol = 0.002, component 1)
+5: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  unable to evaluate scaled gradient
+6: In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+7: Model failed to converge with 1 negative eigenvalue: -1.0e+03 
+8: Model failed to converge with 3 negative eigenvalues: -2.6e+02 -8.5e+05 -5.1e+09 
+Warning messages:
+1: In write.csv(df_out, path_out, sep = ",", row.names = FALSE, col.names = TRUE) :
+  attempt to set 'col.names' ignored
+2: In write.csv(df_out, path_out, sep = ",", row.names = FALSE, col.names = TRUE) :
+  attempt to set 'sep' ignored

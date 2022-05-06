@@ -1,0 +1,51 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: lme4
+Loading required package: Matrix
+
+Attaching package: ‘lmerTest’
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:stats’:
+
+    step
+
+
+Attaching package: ‘tidyr’
+
+The following objects are masked from ‘package:Matrix’:
+
+    expand, pack, unpack
+
+Note: Using an external vector in selections is ambiguous.
+ℹ Use `all_of(i)` instead of `i` to silence this message.
+ℹ See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
+This message is displayed once per session.
+[1] "The model for variable Euth was initiated at 2022-05-06 00:41:27"
+[1] "The model for variable Euth was successfully fit at 2022-05-06 00:48:38"
+[1] "The model for variable Dead was initiated at 2022-05-06 00:48:38"
+[1] "The model for variable Dead was successfully fit at 2022-05-06 00:57:42"
+[1] "The model for variable TotalMortality was initiated at 2022-05-06 00:57:42"
+boundary (singular) fit: see help('isSingular')
+
+[1] "The model for variable TotalMortality was successfully fit at 2022-05-06 01:00:05"
+[1] "The model for variable MortalityProportion was initiated at 2022-05-06 01:00:05"
+[1] "The model for variable MortalityProportion was successfully fit at 2022-05-06 01:07:19"
+[1] "The model for variable Penicillin was initiated at 2022-05-06 01:07:19"
+Error in pwrssUpdate(pp, resp, tol = tolPwrss, GQmat = GQmat, compDev = compDev,  : 
+  (maxstephalfit) PIRLS step-halvings failed to reduce deviance in pwrssUpdate
+Calls: glmer.nb ... <Anonymous> -> <Anonymous> -> stopifnot -> fn -> pwrssUpdate
+In addition: There were 24 warnings (use warnings() to see them)
+Execution halted

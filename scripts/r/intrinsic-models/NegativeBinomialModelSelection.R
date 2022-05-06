@@ -5,7 +5,7 @@ library(tidyr)
 
 rm(list = ls())
 
-load("/storage/hpc/group/deckerlab/cjgwx7/sensor-data/data/master-file-clean.RData") # nolint
+load("/storage/hpc/group/deckerlab/cjgwx7/sensor-data/data/master-file-clean-lagged.RData") # nolint
 
 variable <- commandArgs(trailingOnly = TRUE)[1]
 print(variable)

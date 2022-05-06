@@ -1,4 +1,3 @@
-/var/spool/slurmd/job24495716/slurm_script: line 13: activate: No such file or directory
 
 Attaching package: ‘dplyr’
 
@@ -22,14 +21,6 @@ The following object is masked from ‘package:lme4’:
 The following object is masked from ‘package:stats’:
 
     step
-
-Loading required package: zoo
-
-Attaching package: ‘zoo’
-
-The following objects are masked from ‘package:base’:
-
-    as.Date, as.Date.numeric
 
 
 Attaching package: ‘tidyr’
@@ -81,6 +72,12 @@ boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS was successfully fit."
@@ -169,6 +166,12 @@ boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag1 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag1 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag1 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag1 was successfully fit."
 boundary (singular) fit: see help('isSingular')
@@ -262,6 +265,12 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag2 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag2 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag2 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag2 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
@@ -352,6 +361,12 @@ boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag3 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag3 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag3 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag3 was successfully fit."
@@ -447,6 +462,12 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag4 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag4 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag4 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag4 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
@@ -540,6 +561,12 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag5 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag5 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag5 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag5 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
@@ -631,6 +658,12 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag6 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag6 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag6 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag6 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
@@ -719,6 +752,12 @@ boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag7 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag7 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag7 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag7 was successfully fit."
@@ -814,6 +853,12 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag8 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag8 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag8 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag8 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
@@ -905,6 +950,12 @@ boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag9 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag9 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag9 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag9 was successfully fit."
@@ -1000,6 +1051,12 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag10 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag10 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag10 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag10 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
@@ -1091,6 +1148,12 @@ boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag11 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag11 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag11 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag11 was successfully fit."
@@ -1186,6 +1249,12 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag12 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag12 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag12 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag12 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
@@ -1277,6 +1346,12 @@ boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag13 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag13 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag13 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag13 was successfully fit."
@@ -1372,6 +1447,12 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable WaterMedications_Lag14 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
+[1] "The model for variable PrimaryRespiratory_Lag14 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
+[1] "The model for variable SecondaryRespiratory_Lag14 was successfully fit."
+boundary (singular) fit: see help('isSingular')
+boundary (singular) fit: see help('isSingular')
 [1] "The model for variable ReHS_Lag14 was successfully fit."
 boundary (singular) fit: see help('isSingular')
 boundary (singular) fit: see help('isSingular')
@@ -1417,7 +1498,7 @@ boundary (singular) fit: see help('isSingular')
 [1] "The model for variable SetPointVC_Lag14 was successfully fit."
 There were 50 or more warnings (use warnings() to see the first 50)
 Warning messages:
-1: In write.csv(df_out, file = "/group/deckerlab/cjgwx7/sensor-data/results/WaterIntakeHdRMS-SingleVariable.csv",  :
+1: In write.csv(df_out, file = "/group/deckerlab/cjgwx7/sensor-data/results/single-variable/WaterIntakeHdRMS-SingleVariable.csv",  :
   attempt to set 'col.names' ignored
-2: In write.csv(df_out, file = "/group/deckerlab/cjgwx7/sensor-data/results/WaterIntakeHdRMS-SingleVariable.csv",  :
+2: In write.csv(df_out, file = "/group/deckerlab/cjgwx7/sensor-data/results/single-variable/WaterIntakeHdRMS-SingleVariable.csv",  :
   attempt to set 'sep' ignored

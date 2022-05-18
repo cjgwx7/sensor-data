@@ -12,10 +12,7 @@ depvars <- df %>%
     dplyr::pull(.)
 
 indvars <- df %>%
-    dplyr::select(-c(Order:Inventory,
-                     WaterMedicationType, Comments, TotalMortality,
-                     contains("WaterIntakeRMS"), contains("WaterIntakeVC"),
-                     contains("Days_Lag"), contains("Inventory_Lag"))) # nolint
+    dplyr::select(contains("ReHS")) # nolint
 
 var_names <- colnames(indvars)
 
@@ -25,7 +22,7 @@ fit <- function(x) {
 
 }
 
-fit_results <- mclapply(indvars, fit, mc.cores = 56)
+fit_results <- mclapply(indvars, fit, mc.cores = 15)
 
 extract <- function(x) {
 

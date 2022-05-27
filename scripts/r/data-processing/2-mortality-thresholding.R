@@ -26,7 +26,7 @@ df <- df %>%
                   HMD_Turn = mad_thresholding(HMD_TurnResid, 2, 1.4826)) %>%
     dplyr::select(Order:TotalMortality, HMD_Global, HMD_GlobalResid,
                   HMD_Turn, HMD_TurnResid,
-                  MortalityProportion:SetPointVC_Lag21)
+                  MortalityProportion:HiTempSetPointDeviationVC_Lag21)
 
 ### SAVE NEW FILE
 save(df, file = "/storage/hpc/group/deckerlab/cjgwx7/sensor-data/data/2-master-file-clean-lagged.RData")

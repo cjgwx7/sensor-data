@@ -72,7 +72,8 @@ write.csv(summary_stats,
 df <- df %>%
     # lags are calculated within unqiue turns
     dplyr::group_by(Site_Room_Turn) %>%
-    # lag days 1 through 21
+    # lag days 0 through 21
+    dplyr::mutate(across(c(Days:HiTempSetPointDeviationVC), .names = "{.col}_Lag0")) %>%
     dplyr::mutate(across(c(Days:HiTempSetPointDeviationVC), ~ dplyr::lag(.x, 1), .names = "{.col}_Lag1")) %>%
     dplyr::mutate(across(c(Days:HiTempSetPointDeviationVC), ~ dplyr::lag(.x, 2), .names = "{.col}_Lag2")) %>%
     dplyr::mutate(across(c(Days:HiTempSetPointDeviationVC), ~ dplyr::lag(.x, 3), .names = "{.col}_Lag3")) %>%
@@ -94,6 +95,7 @@ df <- df %>%
     dplyr::mutate(across(c(Days:HiTempSetPointDeviationVC), ~ dplyr::lag(.x, 19), .names = "{.col}_Lag19")) %>%
     dplyr::mutate(across(c(Days:HiTempSetPointDeviationVC), ~ dplyr::lag(.x, 20), .names = "{.col}_Lag20")) %>%
     dplyr::mutate(across(c(Days:HiTempSetPointDeviationVC), ~ dplyr::lag(.x, 21), .names = "{.col}_Lag21")) %>%
+    dplyr::select(-c(Days:HiTempSetPointDeviationVC)) %>%
     dplyr::ungroup(.)
 
 save(df, file = "/storage/hpc/group/deckerlab/cjgwx7/sensor-data/data/1-master-file-clean-lagged.RData")

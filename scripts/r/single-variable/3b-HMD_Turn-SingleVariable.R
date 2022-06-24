@@ -71,7 +71,7 @@ for (i in lags) {
         coef_fit <- coef(summary_fit)
         summary_fit_df <- tibble(`Dependent Variable` = y_variable,
                                  `Independent Variable` = x_variable,
-                                 `Confounding Variable(s)` = "Days post placement",
+                                 `Confounding Variable(s)` = "Days",
                                  `Beta Estimate` = coef_fit[2, 1],
                                  `Standard Error` = coef_fit[2, 2],
                                  `Wald-Test Z-value` = coef_fit[2, 3],
@@ -158,7 +158,7 @@ for (i in lags) {
         coef_fit <- coef(summary_fit)
         summary_fit_df <- tibble(`Dependent Variable` = y_variable,
                                  `Independent Variable` = x_variable,
-                                 `Confounding Variable(s)` = "Days post placement and Inventory",
+                                 `Confounding Variable(s)` = "Days and Inventory",
                                  `Beta Estimate` = coef_fit[2, 1],
                                  `Standard Error` = coef_fit[2, 2],
                                  `Wald-Test Z-value` = coef_fit[2, 3],
@@ -203,7 +203,7 @@ for (i in lags) {
         coef_fit <- coef(summary_fit)
         summary_fit_df <- tibble(`Dependent Variable` = y_variable,
                                  `Independent Variable` = x_variable,
-                                 `Confounding Variable(s)` = "Days post placement and Cubic Inventory",
+                                 `Confounding Variable(s)` = "Polynomial confounders",
                                  `Beta Estimate` = coef_fit[2, 1],
                                  `Standard Error` = coef_fit[2, 2],
                                  `Wald-Test Z-value` = coef_fit[2, 3],

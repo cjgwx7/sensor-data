@@ -69,13 +69,13 @@ infile <- commandArgs(trailingOnly = TRUE)[1]
 file_version <- sub(".*%_", "", infile)
 file_version <- sub(".csv$", "", file_version)
 
-outfile1 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/raw/production",
+outfile1 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/raw/production",
                   "-type-errors-",
                   file_version,
                   ".csv",
                   sep = "")
 
-outfile2 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/processed/production",
+outfile2 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/processed/production",
                   "-",
                   file_version,
                   ".csv",
@@ -111,7 +111,7 @@ outfile7 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-
                   ".csv",
                   sep = "")
 
-outfile8 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/processed/production",
+outfile8 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/processed/production",
                   "-",
                   file_version,
                   ".RData",
@@ -576,6 +576,7 @@ cat(paste("########################################",
           "########################################",
           sep = "\n"),
     sep = "\n")
+
 cat("\n")
 
 cat(paste("########################################",
@@ -606,6 +607,7 @@ cat(paste("########################################",
           "########################################",
           sep = "\n"),
     sep = "\n")
+
 cat("\n")
 
 print(paste("The current script was completed on",

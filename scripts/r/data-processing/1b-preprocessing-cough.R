@@ -53,6 +53,62 @@ cat(paste("########################################",
 cat("\n")
 
 cat(paste("########################################",
+          "     BEGIN: DIRECTORY CONFIGURATION",
+          "########################################",
+          sep = "\n"),
+    sep = "\n")
+
+cat("\n")
+
+###############################################################################
+
+target_file <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/06-16-2022.zip"
+file_name <- str_sub(target_file, -14, -1)
+date <- str_sub(file_name, 1, 10)
+root_dir <- str_remove(target_file, paste("/", file_name, sep = ""))
+dir_check <- file.path(root_dir, date)
+
+
+if (dir.exists(dir_check) == FALSE) {
+
+      cat("Unzipping raw data files\n")
+      dir.create(dir_check)
+      unzip(target_file, exdir = dir_check)
+      file_list <- list.files(file.path(dir_check, "input"))
+      site_codes <- lapply(file_list, str_remove, "Maschhoff_")
+      site_codes <- lapply(site_codes, str_trim, "left")
+      site_codes <- unlist(lapply(site_codes, substring, 1, 4))
+
+      for (i in seq_len(6)) {
+
+            dir.create(file.path(dir_check, "input", site_codes[i]))
+            unzip(file.path(dir_check, "input", file_list[i]),
+                  exdir = file.path(dir_check, "input", site_codes[i]))
+
+      }
+
+      file.rename(from = target_file,
+                  to = file.path(root_dir, date, file_name))
+
+} else {
+
+      cat("Raw data files already exist - moving onto data processing...\n")
+
+}
+
+###############################################################################
+
+cat("\n")
+
+cat(paste("########################################",
+          "      END: DIRECTORY CONFIGURATION",
+          "########################################",
+          sep = "\n"),
+    sep = "\n")
+
+cat("\n")
+
+cat(paste("########################################",
           "         BEGIN: READ IN DATA",
           "########################################",
           sep = "\n"),
@@ -62,107 +118,33 @@ cat("\n")
 
 ###############################################################################
 
-##### FILE INPUT/OUTPUT SPECS
+dir_list <- list.dirs(file.path(root_dir, date, "input"), recursive = FALSE)
+site_codes <- list.dirs(file.path(root_dir, date, "input"),
+                        full.names = FALSE,
+                        recursive = FALSE)
 
-infile <- commandArgs(trailingOnly = TRUE)[1]
+df_list <- list()
 
-file_version <- sub(".*%_", "", infile)
-file_version <- sub(".csv$", "", file_version)
+for (i in seq_len(6)) {
 
-outfile1 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/raw/production",
-                  "-type-errors-",
-                  file_version,
-                  ".csv",
-                  sep = "")
+      df_tmp <- read_csv(file.path(dir_list[i], "devices_combined_list.csv"),
+                         col_select = c(3, 5, 7:9),
+                         col_names = FALSE,
+                         col_types = c("ddccccdcd"),
+                         skip = 1,
+                         trim_ws = TRUE) %>%
+            rename(Device = X3,
+                   CalendarDate = X5,
+                   Temp_ReHS = X7,
+                   Color_ReHS = X8,
+                   ReHS = X9) %>%
+            mutate(Site = site_codes[i])
 
-outfile2 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/processed/production",
-                  "-",
-                  file_version,
-                  ".csv",
-                  sep = "")
-
-outfile3 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-SummaryStats-PreQC-",
-                  file_version,
-                  ".csv",
-                  sep = "")
-
-outfile4 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-SiteSummaryStats-PreQC-",
-                  file_version,
-                  ".csv",
-                  sep = "")
-
-outfile5 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-SummaryStats-PostQC-",
-                  file_version,
-                  ".csv",
-                  sep = "")
-
-outfile6 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-SiteSummaryStats-PostQC-",
-                  file_version,
-                  ".csv",
-                  sep = "")
-
-outfile7 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-QC_Removals-",
-                  file_version,
-                  ".csv",
-                  sep = "")
-
-outfile8 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/processed/production",
-                  "-",
-                  file_version,
-                  ".RData",
-                  sep = "")
-
-col_names <- c("Site", "Room", "Date", "Days",
-              "Inventory", "Euth", "Dead",
-              "HiTempRMS", "LowTempRMS",
-              "SetPointRMS", "WaterDispRMS",
-              "AvgTempVC", "HiTempVC", "LowTempVC",
-              "SetPointVC", "WaterDispVC",
-              "Penicillin", "Dexamethasone",
-              "Ceftiofur", "Enroflaxin", "Tetracycline",
-              "Lincomycin", "OtherTreatments",
-              "TotalTreatments", "WaterMedications",
-              "WaterMedicationType", "Comments")
-col_types <- c(rep("c", 3), rep("n", 22), rep("c", 2))
-
-##### FILE INPUT
-cat("Searching for variable type errors...\n")
-
-production_prbs <- problems(read_csv(file = infile,
-                                     col_types = col_types,
-                                     na = "NA",
-                                     trim_ws = TRUE))
-
-if (nrow(production_prbs) == 0) {
-
-  cat("There are no variable type errors in the input file\n")
-
-} else {
-
-  write_csv(production_prbs,
-            file = outfile1)
-
-  stop(paste("Variable type error(s) in input file.",
-             "Check 'production-type-errors' log file and fix mistake."))
+      df_list[[i]] <- df_tmp
 
 }
 
-cat("Reading in clean data file...\n")
-
-production <- suppressWarnings(read_csv(file = infile,
-                                        col_names = col_names,
-                                        col_types = col_types,
-                                        na = "NA",
-                                        trim_ws = TRUE,
-                                        skip = 1))
-
-cat("Printing raw dataset structure...\n")
-glimpse(production)
+cough <- bind_rows(df_list)
 
 ###############################################################################
 

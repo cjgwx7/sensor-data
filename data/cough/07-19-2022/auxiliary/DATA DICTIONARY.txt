@@ -1,0 +1,50 @@
+SoundTalks Data Dictionary
+For the Airspace Data list .csv file
+•	Airspace id: a unique identifier for each airspace in the SoundTalks database (3 digits)
+o	4NL2 Rm 1 355
+o	4NL2 Rm 2 356
+o	BIBL Rm 3 389
+o	BIBL Rm 4 390
+o	CON2 Rm 1(North) 343
+o	CON2 Rm 2 (South) 342
+o	G1TC Rm 1 353
+o	G1TC Rm 2 354
+o	HOTC Rm 7 391
+o	HOTC Rm 8 392
+o	TPLJ Rm 1 412
+o	TPLJ Rm 2 413
+•	Fullname: Full name given to the airspace at the time of installation by the installer.
+o	Generic name for the first airspace is ‘House1, Floor 1, Room 1’ unless changed by the installer.
+o	The Room portion of the fullname should match the room number listed above with the airspace ID.
+•	Date (America/Chicago): Date for the reported readings in Day (2 digit) Month (3 letter) year (4 digit)
+•	Temperature – color: an indicator for thermal shock, unknown bounds on the color change.  Not material for this study.
+•	Temperature (°C) – data: Aggregated average temperature for the devices in the room over the 24-hour day. Reported in degrees Celsius.	
+•	ReHS – color: The name of the color denoting the classification of ReHS for the device in the airspace with the lowest ReHS (Respiratory Health Status). A lower ReHS denotes a worsening of Respiratory Health Status.
+o	If 5 devices in the room: 
+	4 green and 1 yellow, then ‘yellow’.
+	2 green, 1 yellow and 2 red, then ‘red’
+o	Green – denotes ReHS between 100 and 60
+o	Yellow -denotes values between 59 and 40
+o	Red – denotes values between 39 and 1
+o	Blue or gray denote days when all monitors in the airspace were either not powered, offline or ‘collecting data’ prior to reporting a result.
+
+•	ReHS – data: The Respiratory Health Status number for the device in the airspace with the lowest ReHS. Values are numerical between 1 and 99. A lower ReHS denotes a worsening of Respiratory Health Status.
+
+For the Device data list .csv file
+•	Device id: A Unique identifier for each device within the SoundTalks database
+•	Device name: The device ‘friendly name’ given to the device by the installer. 
+o	This name often denotes system, site, room and physical location in the barn.
+o	Airspaces with 3 devices are labeled E, C, W or N, C, S.  (East, Center, West or North, Center, South)
+o	Airspaces with 4 devices EE, EC, WC, WW, etc.
+o	Airspaces with 5 devices EE, EC, C, WC, WW, etc.
+•	Device code: This code is an identifier given to the device by the manufacturer.  It is a unique identifier for the hardware and would be similar to a serial number.
+•	Date (America/Chicago): Date for the reported readings in Day (2 digit) Month (3 letter) year (4 digit)
+•	Temperature – color: an indicator for thermal shock, unknown bounds on the color change.  Not material for this study.
+•	Temperature (°C) – data: Average temperature for the device over the 24-hour day. Reported in degrees Celsius.	
+•	ReHS – color: The name of the color denoting the classification of ReHS for the device over 24 hours (Respiratory Health Status). A lower ReHS denotes a worsening of Respiratory Health Status.
+o	Green – denotes ReHS between 100 and 60
+o	Yellow -denotes values between 59 and 40
+o	Red – denotes values between 39 and 1
+o	Blue or gray denote days when the monitor was either not powered, offline or ‘collecting data’ prior to reporting a result.
+•	ReHS - data: The Respiratory Health Status number for the device over the 24-hour period. Values are numerical between 1 and 99. A lower ReHS denotes a worsening of Respiratory Health Status.
+

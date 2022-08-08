@@ -393,81 +393,21 @@ production_v8 <- production_v7 %>%
   mutate(Inventory = ifelse(Inventory < 1 | Inventory > 4500, NA, Inventory),
          across(c(Days:HiTempSetPointDeviationVC),
                 ~ ifelse(is.na(Inventory) == TRUE, NA, .x)),
-         across(c(EuthProportion, DeadProportion),
-                ~ ifelse(.x < 0 | .x > 0.025, NA, .x)),
   ### Mortality quality control
-         Euth = ifelse(is.na(EuthProportion) == TRUE, NA, Euth),
-         Dead = ifelse(is.na(DeadProportion) == TRUE, NA, Dead),
          TotalMortalityProportion = ifelse(TotalMortalityProportion < 0 |
-                                             TotalMortalityProportion > 0.05 |
-                                             is.na(EuthProportion) == TRUE |
-                                             is.na(DeadProportion),
+                                             TotalMortalityProportion > 0.075,
                                            NA, TotalMortalityProportion),
-         TotalMortality = ifelse(is.na(Euth) == TRUE |
-                                   is.na(Dead) == TRUE |
-                                   is.na(TotalMortalityProportion) == TRUE,
-                                 NA, TotalMortality),
+         across(c(Euth:TotalMortality),
+                ~ ifelse(is.na(TotalMortalityProportion) == TRUE,
+                          NA, .x)),
   ### Treatment quality control
-         across(c(PenicillinProportion, EnroflaxinProportion,
-                  TetracyclineProportion, LincomycinProportion,
-                  OtherTreatmentsProportion), ~ ifelse(.x < 0 | .x > 0.10,
-                                                       NA, .x)),
-         across(c(DexamethasoneProportion, CeftiofurProportion),
-                ~ ifelse(.x < 0 | .x > 0.15, NA, .x)),
-         PrimaryRespiratoryProportion = ifelse(PrimaryRespiratoryProportion < 0 |
-                                                 PrimaryRespiratoryProportion > 0.25 |
-                                                 is.na(CeftiofurProportion) == TRUE |
-                                                 is.na(EnroflaxinProportion) == TRUE |
-                                                 is.na(TetracyclineProportion) == TRUE,
-                                               NA, PrimaryRespiratoryProportion),
-         SecondaryRespiratoryProportion = ifelse(SecondaryRespiratoryProportion < 0 |
-                                                   SecondaryRespiratoryProportion > 0.15 |
-                                                   is.na(PenicillinProportion) == TRUE |
-                                                   is.na(DexamethasoneProportion) == TRUE |
-                                                   is.na(LincomycinProportion) == TRUE,
-                                                 NA, SecondaryRespiratoryProportion),
          TotalTreatmentsProportion = ifelse(TotalTreatmentsProportion < 0 |
-                                              TotalTreatmentsProportion > 0.25 |
-                                              is.na(CeftiofurProportion) == TRUE |
-                                              is.na(EnroflaxinProportion) == TRUE |
-                                              is.na(TetracyclineProportion) == TRUE |
-                                              is.na(PenicillinProportion) == TRUE |
-                                              is.na(DexamethasoneProportion) == TRUE |
-                                              is.na(LincomycinProportion) == TRUE |
-                                              is.na(OtherTreatmentsProportion) == TRUE,
-                                            NA, TotalTreatmentsProportion),
-         Penicillin = ifelse(is.na(PenicillinProportion) == TRUE, NA, Penicillin),
-         Dexamethasone = ifelse(is.na(DexamethasoneProportion) == TRUE,
-                                NA, Dexamethasone),
-         Ceftiofur = ifelse(is.na(CeftiofurProportion) == TRUE,
-                            NA, Ceftiofur),
-         Enroflaxin = ifelse(is.na(EnroflaxinProportion) == TRUE,
-                             NA, Enroflaxin),
-         Tetracycline = ifelse(is.na(TetracyclineProportion) == TRUE,
-                               NA, Tetracycline),
-         Lincomycin = ifelse(is.na(LincomycinProportion) == TRUE,
-                                   NA, Lincomycin),
-         OtherTreatments = ifelse(is.na(OtherTreatmentsProportion) == TRUE,
-                                  NA, OtherTreatments),
-         PrimaryRespiratory = ifelse(is.na(PrimaryRespiratoryProportion) == TRUE |
-                                       is.na(CeftiofurProportion) == TRUE |
-                                       is.na(EnroflaxinProportion) == TRUE |
-                                       is.na(TetracyclineProportion) == TRUE,
-                                     NA, PrimaryRespiratory),
-         SecondaryRespiratory = ifelse(is.na(SecondaryRespiratoryProportion) == TRUE |
-                                         is.na(PenicillinProportion) == TRUE |
-                                         is.na(DexamethasoneProportion) == TRUE |
-                                         is.na(LincomycinProportion) == TRUE,
-                                     NA, SecondaryRespiratory),
-         TotalTreatments = ifelse(is.na(CeftiofurProportion) == TRUE |
-                                    is.na(EnroflaxinProportion) == TRUE |
-                                    is.na(TetracyclineProportion) == TRUE |
-                                    is.na(PenicillinProportion) == TRUE |
-                                    is.na(DexamethasoneProportion) == TRUE |
-                                    is.na(LincomycinProportion) == TRUE |
-                                    is.na(OtherTreatmentsProportion) == TRUE |
-                                    is.na(TotalTreatmentsProportion) == TRUE,
-                                  NA, TotalTreatments),
+                                              TotalTreatmentsProportion > 0.25,
+                                              NA,
+                                              TotalTreatmentsProportion),
+         across(c(Penicillin:TotalTreatments), ~ ifelse(is.na(TotalTreatmentsProportion),
+                                                          NA,
+                                                          .x)),
          WaterMedications = ifelse(!WaterMedications %in% c(0, 1),
                                    NA, WaterMedications),
   ### Water disappearance quality control
@@ -484,6 +424,9 @@ production_v8 <- production_v7 %>%
          across(c(LowTempVC, HiTempVC),
                 ~ ifelse(.x < 45 | .x > 105 | TempRangeVC < 0,
                          NA, .x)),
+         AvgTempVC = ifelse(AvgTempVC < 50 | AvgTempVC > 100 |
+                              AvgTempVC < LowTempVC |
+                              AvgTempVC > HiTempVC, NA, AvgTempVC),
          TempRangeRMS = ifelse(is.na(LowTempRMS) == TRUE |
                                  is.na(HiTempRMS) == TRUE,
                                NA, TempRangeRMS),

@@ -1,4 +1,4 @@
-[1] "The current script was initialized on Thursday, July 14, 2022 at 05:04 PM"
+[1] "The current script was initialized on Monday, August 08, 2022 at 04:40 PM"
 
 ########################################
         BEGIN: ENVIRONMENT SETUP
@@ -38,34 +38,34 @@ Searching for variable type errors...
 There are no variable type errors in the input file
 Reading in clean data file...
 Printing raw dataset structure...
-Rows: 3,299
+Rows: 6,175
 Columns: 27
 $ Site                <chr> "4NL2", "4NL2", "4NL2", "4NL2", "4NL2", "4NL2", "4…
 $ Room                <chr> "1South", "1South", "1South", "1South", "1South", …
-$ Date                <chr> "4-Jan-21", "5-Jan-21", "6-Jan-21", "7-Jan-21", "8…
-$ Days                <dbl> NA, NA, NA, NA, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,…
-$ Inventory           <dbl> NA, NA, NA, NA, 908, 908, 908, 2860, 2860, 2860, 2…
-$ Euth                <dbl> NA, NA, NA, NA, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0…
-$ Dead                <dbl> NA, NA, NA, NA, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0…
-$ HiTempRMS           <dbl> NA, NA, NA, NA, NA, 87.4, 84.2, 84.0, 83.9, 83.6, …
-$ LowTempRMS          <dbl> NA, NA, NA, NA, NA, 68.7, 80.6, 80.3, 80.6, 80.8, …
-$ SetPointRMS         <dbl> NA, NA, NA, NA, NA, 79.9, 83.5, 83.5, 83.5, 83.5, …
-$ WaterDispRMS        <dbl> NA, NA, NA, NA, NA, 36, 116, 123, 246, 495, 502, 5…
+$ Date                <chr> "8-Jan-21", "9-Jan-21", "10-Jan-21", "11-Jan-21", …
+$ Days                <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,…
+$ Inventory           <dbl> 908, 908, 908, 2860, 2860, 2860, 2859, 2858, 2858,…
+$ Euth                <dbl> 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,…
+$ Dead                <dbl> 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1,…
+$ HiTempRMS           <dbl> NA, 87.4, 84.2, 84.0, 83.9, 83.6, 83.6, 83.3, 83.1…
+$ LowTempRMS          <dbl> NA, 68.7, 80.6, 80.3, 80.6, 80.8, 80.9, 80.6, 80.4…
+$ SetPointRMS         <dbl> NA, 79.9, 83.5, 83.5, 83.5, 83.5, 83.5, 83.3, 83.2…
+$ WaterDispRMS        <dbl> NA, 36, 116, 123, 246, 495, 502, 540, 559, 609, 67…
 $ AvgTempVC           <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
-$ HiTempVC            <dbl> 58.0, 60.4, 56.7, 72.9, 87.4, 84.2, 84.0, 83.9, 83…
-$ LowTempVC           <dbl> 51.5, 55.4, 55.2, 55.1, 68.7, 80.6, 80.3, 80.6, 80…
-$ SetPointVC          <dbl> 55.0, 55.0, 55.0, 59.0, 79.9, 83.5, 83.5, 83.5, 83…
-$ WaterDispVC         <dbl> 33, 0, 0, 0, 0, 107, 125, 189, 478, 517, 527, 578,…
-$ Penicillin          <dbl> 0, 0, 0, 0, 0, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 0, 0,…
-$ Dexamethasone       <dbl> 0, 0, 0, 0, 0, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 48, 7…
-$ Ceftiofur           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 7…
-$ Enroflaxin          <dbl> 0, 0, 0, 0, 0, 18, 20, 18, 46, 47, 55, 39, 37, 45,…
-$ Tetracycline        <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ Lincomycin          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ OtherTreatments     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ TotalTreatments     <dbl> 0, 0, 0, 0, 0, 22, 22, 20, 54, 59, 69, 47, 49, 61,…
-$ WaterMedications    <dbl> 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1,…
-$ WaterMedicationType <chr> "", "", "", "", "", "neo", "neo", "neo", "neo", "n…
+$ HiTempVC            <dbl> NA, 84.2, 84.0, 83.9, 83.6, 83.6, 83.3, 83.1, 83.2…
+$ LowTempVC           <dbl> NA, 80.6, 80.3, 80.6, 80.8, 80.9, 80.6, 80.4, 80.2…
+$ SetPointVC          <dbl> NA, 83.5, 83.5, 83.5, 83.5, 83.5, 83.3, 83.2, 83.1…
+$ WaterDispVC         <dbl> NA, 107, 125, 189, 478, 517, 527, 578, 608, 674, 7…
+$ Penicillin          <dbl> NA, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 0, 0, 0, 0, 0, 0…
+$ Dexamethasone       <dbl> NA, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 48, 76, 91, 74, …
+$ Ceftiofur           <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 76, 91, 74, …
+$ Enroflaxin          <dbl> NA, 18, 20, 18, 46, 47, 55, 39, 37, 45, 49, 35, 19…
+$ Tetracycline        <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ Lincomycin          <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ OtherTreatments     <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ TotalTreatments     <dbl> NA, 22, 22, 20, 54, 59, 69, 47, 49, 61, 57, 131, 1…
+$ WaterMedications    <dbl> NA, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1…
+$ WaterMedicationType <chr> "", "Neomycin", "Neomycin", "Neomycin", "Neomycin"…
 $ Comments            <chr> "", "", "", "", "", "", "", "", "", "", "", "", ""…
 
 ########################################
@@ -92,7 +92,7 @@ Calculating new variables...
 Calculating pre-QC summary statistics...
 `summarise()` has grouped output by 'Site'. You can override using the
 `.groups` argument.
-There were 28 warnings (use warnings() to see them)
+There were 24 warnings (use warnings() to see them)
 
 ########################################
      END: VARIABLE CALCULATION
@@ -106,7 +106,7 @@ Removal of nonsensical values and outliers...
 Calculating post-QC summary statistics...
 `summarise()` has grouped output by 'Site'. You can override using the
 `.groups` argument.
-There were 28 warnings (use warnings() to see them)
+There were 24 warnings (use warnings() to see them)
 
 ########################################
         END: QUALITY CONTROL
@@ -117,7 +117,7 @@ There were 28 warnings (use warnings() to see them)
 ########################################
 
 Printing clean dataset structure...
-Rows: 3,013
+Rows: 5,676
 Columns: 61
 $ Order                          <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, …
 $ GlobalID                       <chr> "4NL2_1_44204", "4NL2_1_44205", "4NL2_1…
@@ -141,27 +141,27 @@ $ Dead                           <dbl> 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, �
 $ DeadProportion                 <dbl> 0.0000000000, 0.0000000000, 0.000000000…
 $ TotalMortality                 <dbl> 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, …
 $ TotalMortalityProportion       <dbl> 0.0000000000, 0.0000000000, 0.000000000…
-$ Penicillin                     <dbl> 0, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 0, 0, …
-$ PenicillinProportion           <dbl> 0.0000000000, 0.0022026432, 0.001101321…
-$ Dexamethasone                  <dbl> 0, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 48, 76…
-$ DexamethasoneProportion        <dbl> 0.0000000000, 0.0022026432, 0.001101321…
-$ Ceftiofur                      <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 76…
-$ CeftiofurProportion            <dbl> 0.000000000, 0.000000000, 0.000000000, …
-$ Enroflaxin                     <dbl> 0, 18, 20, 18, 46, 47, 55, 39, 37, 45, …
-$ EnroflaxinProportion           <dbl> 0.0000000000, 0.0198237885, 0.022026431…
-$ Tetracycline                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-$ TetracyclineProportion         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-$ Lincomycin                     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-$ LincomycinProportion           <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-$ OtherTreatments                <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-$ OtherTreatmentsProportion      <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-$ PrimaryRespiratory             <dbl> 0, 18, 20, 18, 46, 47, 55, 39, 37, 45, …
-$ PrimaryRespiratoryProportion   <dbl> 0.000000000, 0.019823789, 0.022026432, …
-$ SecondaryRespiratory           <dbl> 0, 4, 2, 2, 8, 12, 14, 8, 12, 16, 8, 48…
-$ SecondaryRespiratoryProportion <dbl> 0.0000000000, 0.0044052863, 0.002202643…
-$ TotalTreatments                <dbl> 0, 22, 22, 20, 54, 59, 69, 47, 49, 61, …
-$ TotalTreatmentsProportion      <dbl> 0.000000000, 0.024229075, 0.024229075, …
-$ WaterMedications               <dbl> 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, …
+$ Penicillin                     <dbl> NA, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 0, 0,…
+$ PenicillinProportion           <dbl> NA, 0.0022026432, 0.0011013216, 0.00034…
+$ Dexamethasone                  <dbl> NA, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 48, 7…
+$ DexamethasoneProportion        <dbl> NA, 0.0022026432, 0.0011013216, 0.00034…
+$ Ceftiofur                      <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 7…
+$ CeftiofurProportion            <dbl> NA, 0.000000000, 0.000000000, 0.0000000…
+$ Enroflaxin                     <dbl> NA, 18, 20, 18, 46, 47, 55, 39, 37, 45,…
+$ EnroflaxinProportion           <dbl> NA, 0.0198237885, 0.0220264317, 0.00629…
+$ Tetracycline                   <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ TetracyclineProportion         <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ Lincomycin                     <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ LincomycinProportion           <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ OtherTreatments                <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ OtherTreatmentsProportion      <dbl> NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ PrimaryRespiratory             <dbl> NA, 18, 20, 18, 46, 47, 55, 39, 37, 45,…
+$ PrimaryRespiratoryProportion   <dbl> NA, 0.019823789, 0.022026432, 0.0062937…
+$ SecondaryRespiratory           <dbl> NA, 4, 2, 2, 8, 12, 14, 8, 12, 16, 8, 4…
+$ SecondaryRespiratoryProportion <dbl> NA, 0.0044052863, 0.0022026432, 0.00069…
+$ TotalTreatments                <dbl> NA, 22, 22, 20, 54, 59, 69, 47, 49, 61,…
+$ TotalTreatmentsProportion      <dbl> NA, 0.024229075, 0.024229075, 0.0069930…
+$ WaterMedications               <dbl> NA, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1,…
 $ WaterDispRMS                   <dbl> NA, NA, 116, NA, NA, 495, 502, 540, 559…
 $ WaterDispHdRMS                 <dbl> NA, NA, 0.1277533, NA, NA, 0.1730769, 0…
 $ WaterDispVC                    <dbl> NA, 107, 125, NA, 478, 517, 527, 578, 6…
@@ -172,18 +172,18 @@ $ HiTempRMS                      <dbl> NA, 87.4, 84.2, 84.0, 83.9, 83.6, 83.6,�
 $ TempRangeRMS                   <dbl> NA, 18.7, 3.6, 3.7, 3.3, 2.8, 2.7, 2.7,…
 $ LowTempSetPointDeviationRMS    <dbl> NA, 11.2, 2.9, 3.2, 2.9, 2.7, 2.6, 2.7,…
 $ HiTempSetPointDeviationRMS     <dbl> NA, -7.5, -0.7, -0.5, -0.4, -0.1, -0.1,…
-$ SetPointVC                     <dbl> 79.9, 83.5, 83.5, 83.5, 83.5, 83.5, 83.…
-$ LowTempVC                      <dbl> 68.7, 80.6, 80.3, 80.6, 80.8, 80.9, 80.…
+$ SetPointVC                     <dbl> NA, 83.5, 83.5, 83.5, 83.5, 83.5, 83.3,…
+$ LowTempVC                      <dbl> NA, 80.6, 80.3, 80.6, 80.8, 80.9, 80.6,…
 $ AvgTempVC                      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-$ HiTempVC                       <dbl> 87.4, 84.2, 84.0, 83.9, 83.6, 83.6, 83.…
-$ TempRangeVC                    <dbl> 18.7, 3.6, 3.7, 3.3, 2.8, 2.7, 2.7, 2.7…
-$ LowTempSetPointDeviationVC     <dbl> 11.2, 2.9, 3.2, 2.9, 2.7, 2.6, 2.7, 2.8…
+$ HiTempVC                       <dbl> NA, 84.2, 84.0, 83.9, 83.6, 83.6, 83.3,…
+$ TempRangeVC                    <dbl> NA, 3.6, 3.7, 3.3, 2.8, 2.7, 2.7, 2.7, …
+$ LowTempSetPointDeviationVC     <dbl> NA, 2.9, 3.2, 2.9, 2.7, 2.6, 2.7, 2.8, …
 $ AvgTempSetPointDeviationVC     <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-$ HiTempSetPointDeviationVC      <dbl> -7.5, -0.7, -0.5, -0.4, -0.1, -0.1, 0.0…
+$ HiTempSetPointDeviationVC      <dbl> NA, -0.7, -0.5, -0.4, -0.1, -0.1, 0.0, …
 Exporting clean dataset...
 
 ########################################
         END: FILE OUTPUT
 ########################################
 
-[1] "The current script was completed on Thursday, July 14, 2022 at 05:04 PM"
+[1] "The current script was completed on Monday, August 08, 2022 at 04:40 PM"

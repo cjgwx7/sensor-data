@@ -159,8 +159,12 @@ cat("\n")
 
 ###############################################################################
 
+production_dates <- production_dates[which.max(production_dates)]
+cough_dates <- cough_dates[which.max(cough_dates)]
+
 master_root <- "/group/deckerlab/cjgwx7/sensor-data/data/master"
 master_dates <- c(production_dates, cough_dates)
+
 master_filename_rdata <- paste("master-",
                                master_dates[which.min(master_dates)],
                                ".RData",

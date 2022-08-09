@@ -214,7 +214,8 @@ production_v4 <- production_v3 %>%
   group_by(Site_Room) %>%
   mutate(Turn = dense_rank(Turn)) %>%
   ungroup(.) %>%
-  mutate(Site_Room_Turn = paste(Site, "_", Room, "_", Turn, sep = ""),
+  mutate(Site_Turn = paste(Site, "_", Turn, sep = ""),
+         Site_Room_Turn = paste(Site, "_", Room, "_", Turn, sep = ""),
          GlobalID = paste(Site, "_", Room, "_", NumericDate, sep = ""),
          Site_NumericDate = paste(Site, "_", NumericDate, sep = ""))
 
@@ -228,11 +229,12 @@ production_v5 <- production_v4 %>%
          Room = factor(Room),
          Site_Room = factor(Site_Room),
          Turn = factor(Turn),
+         Site_Turn = factor(Site_Turn),
          Site_Room_Turn = factor(Site_Room_Turn)) %>%
   rowid_to_column(., var = "Order") %>%
   mutate(Order = as.numeric(Order)) %>%
   select(Order, GlobalID, Site, Site_NumericDate, Room, OldRoom,
-         Site_Room, Turn, Site_Room_Turn, CalendarDate,
+         Site_Room, Turn, Site_Turn, Site_Room_Turn, CalendarDate,
          NumericDate, Days, Inventory, Euth, Dead,
          Penicillin, Dexamethasone, Ceftiofur, Enroflaxin,
          Tetracycline, Lincomycin, OtherTreatments, TotalTreatments,
@@ -308,13 +310,15 @@ production_v7 <- left_join(production_v6, site_numeric_date,
   mutate(WaterDispHdRMS = WaterDispRMS / Inventory,
          WaterDispHdVC = WaterDispVC / Inventory) %>%
   ### Temperature
-  mutate(TempRangeRMS = HiTempRMS - LowTempRMS,
+  mutate(MidPointTempRMS = (HiTempRMS + LowTempRMS) / 2,
+         TempRangeRMS = HiTempRMS - LowTempRMS,
          TempRangeVC = HiTempVC - LowTempVC,
-         LowTempSetPointDeviationRMS = SetPointRMS - LowTempRMS,
-         HiTempSetPointDeviationRMS = SetPointRMS - HiTempRMS,
-         LowTempSetPointDeviationVC = SetPointVC - LowTempVC,
-         AvgTempSetPointDeviationVC = SetPointVC - AvgTempVC,
-         HiTempSetPointDeviationVC = SetPointVC - HiTempVC) %>%
+         LowTempSetPointDeviationRMS = LowTempRMS - SetPointRMS,
+         MidPointTempSetPointDeviationRMS = MidPointTempRMS - SetPointRMS,
+         HiTempSetPointDeviationRMS = HiTempRMS - SetPointRMS,
+         LowTempSetPointDeviationVC = LowTempVC - SetPointVC,
+         AvgTempSetPointDeviationVC = AvgTempVC - SetPointVC,
+         HiTempSetPointDeviationVC = HiTempVC - SetPointVC) %>%
   ### Rearrange variables
   select(Order:Inventory, InventoryChange, TotalInventoryChange, Marketing,
          Euth, EuthProportion, Dead, DeadProportion,
@@ -330,8 +334,9 @@ production_v7 <- left_join(production_v6, site_numeric_date,
          SecondaryRespiratory, SecondaryRespiratoryProportion,
          TotalTreatments, TotalTreatmentsProportion, WaterMedications,
          WaterDispRMS, WaterDispHdRMS, WaterDispVC, WaterDispHdVC,
-         SetPointRMS, LowTempRMS, HiTempRMS, TempRangeRMS,
-         LowTempSetPointDeviationRMS, HiTempSetPointDeviationRMS,
+         SetPointRMS, LowTempRMS, MidPointTempRMS,
+         HiTempRMS, TempRangeRMS, LowTempSetPointDeviationRMS,
+         HiTempSetPointDeviationRMS, MidPointTempSetPointDeviationRMS,
          SetPointVC, LowTempVC, AvgTempVC, HiTempVC, TempRangeVC,
          LowTempSetPointDeviationVC, AvgTempSetPointDeviationVC,
          HiTempSetPointDeviationVC)
@@ -418,12 +423,15 @@ production_v8 <- production_v7 %>%
   ### Temperature quality control
          across(c(SetPointRMS, SetPointVC), ~ ifelse(.x < 60 | .x > 90,
                                                      NA, .x)),
-         across(c(LowTempRMS:HiTempRMS),
+         across(c(LowTempRMS, HiTempRMS),
                 ~ ifelse(.x < 45 | .x > 105 | TempRangeRMS < 0,
                          NA, .x)),
          across(c(LowTempVC, HiTempVC),
                 ~ ifelse(.x < 45 | .x > 105 | TempRangeVC < 0,
                          NA, .x)),
+         MidPointTempRMS = ifelse(MidPointTempRMS < 50 | MidPointTempRMS > 100 |
+                              MidPointTempRMS < LowTempRMS |
+                              MidPointTempRMS > HiTempRMS, NA, MidPointTempRMS),
          AvgTempVC = ifelse(AvgTempVC < 50 | AvgTempVC > 100 |
                               AvgTempVC < LowTempVC |
                               AvgTempVC > HiTempVC, NA, AvgTempVC),
@@ -436,6 +444,9 @@ production_v8 <- production_v7 %>%
          LowTempSetPointDeviationRMS = ifelse(is.na(SetPointRMS) == TRUE |
                                                 is.na(LowTempRMS) == TRUE,
                                               NA, LowTempSetPointDeviationRMS),
+         MidPointTempSetPointDeviationRMS = ifelse(is.na(SetPointRMS) == TRUE |
+                                                is.na(MidPointTempRMS) == TRUE,
+                                              NA, MidPointTempSetPointDeviationRMS),
          HiTempSetPointDeviationRMS = ifelse(is.na(SetPointRMS) == TRUE |
                                                 is.na(HiTempRMS) == TRUE,
                                               NA, HiTempSetPointDeviationRMS),

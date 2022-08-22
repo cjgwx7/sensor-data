@@ -6,7 +6,7 @@
 #SBATCH -A animalsci
 #SBATCH --mem 1G
 #SBATCH -t 00-00:10
-#SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/sbatch/slurm-out/data-processing/2-preprocessing-merge-r-%j.out
+#SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/log/2-preprocessing-merge-r-%j.out
 #SBATCH --mail-type END
 #SBATCH --mail-user cgrohmann@mail.missouri.edu
 

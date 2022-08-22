@@ -6,9 +6,9 @@
 #SBATCH -A animalsci
 #SBATCH --mem 1G
 #SBATCH -t 00-00:10
-#SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/sbatch/slurm-out/data-processing/1b-preprocessing-cough-r-%j.out
+#SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/log/1b-preprocessing-cough-r-%j.out
 #SBATCH --mail-type END
 #SBATCH --mail-user cgrohmann@mail.missouri.edu
 
 source activate r-sensors
-Rscript "/group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/1b-preprocessing-cough.R" "/group/deckerlab/cjgwx7/sensor-data/data/cough/07-19-2022.zip"
+Rscript "/group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/1b-preprocessing-cough.R" "/group/deckerlab/cjgwx7/sensor-data/data/cough/08-16-2022.zip"

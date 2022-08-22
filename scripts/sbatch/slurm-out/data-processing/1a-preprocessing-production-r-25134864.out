@@ -1,0 +1,42 @@
+[1] "The current script was initialized on Monday, August 22, 2022 at 12:59 PM"
+
+########################################
+        BEGIN: ENVIRONMENT SETUP
+########################################
+
+Loading package: data.table
+Loading package: dplyr
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:data.table’:
+
+    between, first, last
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading package: readr
+Loading package: stringr
+Loading package: tibble
+Loading package: tidyr
+
+########################################
+         END: ENVIRONMENT SETUP
+########################################
+
+########################################
+         BEGIN: READ IN DATA
+########################################
+
+Searching for variable type errors...
+New names:
+* `` -> ...28
+* `` -> ...29
+Error: Variable type error(s) in input file. Check 'production-type-errors' log file and fix mistake.
+Execution halted

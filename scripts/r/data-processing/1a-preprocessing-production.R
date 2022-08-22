@@ -310,7 +310,9 @@ production_v7 <- left_join(production_v6, site_numeric_date,
   mutate(WaterDispHdRMS = WaterDispRMS / Inventory,
          WaterDispHdVC = WaterDispVC / Inventory) %>%
   ### Temperature
-  mutate(MidPointTempRMS = (HiTempRMS + LowTempRMS) / 2,
+  mutate(SetPointRMS = coalesce(SetPointRMS, SetPointVC),
+         SetPointVC = coalesce(SetPointVC, SetPointRMS),
+         MidPointTempRMS = (HiTempRMS + LowTempRMS) / 2,
          TempRangeRMS = HiTempRMS - LowTempRMS,
          TempRangeVC = HiTempVC - LowTempVC,
          LowTempSetPointDeviationRMS = LowTempRMS - SetPointRMS,

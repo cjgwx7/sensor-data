@@ -130,7 +130,7 @@ cough_v2 <- cough %>%
 
 cat("Merging files...\n")
 master <- left_join(production_v2, cough_v2, by = "AltGlobalID") %>%
-      select(GlobalID, AltGlobalID,
+      select(Order, GlobalID, AltGlobalID,
              Site:HiTempSetPointDeviationVC,
              Temp_ReHS:Color_ReHS)
 

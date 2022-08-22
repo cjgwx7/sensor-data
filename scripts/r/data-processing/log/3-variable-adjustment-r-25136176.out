@@ -1,5 +1,4 @@
-/var/spool/slurmd/job25046964/slurm_script: line 13: activate: No such file or directory
-[1] "The current script was initialized on Thursday, August 11, 2022 at 04:45 PM"
+[1] "The current script was initialized on Monday, August 22, 2022 at 05:51 PM"
 
 ########################################
         BEGIN: ENVIRONMENT SETUP
@@ -25,6 +24,20 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Loading package: lmerTest
+Loading required package: lme4
+Loading required package: Matrix
+
+Attaching package: ‘lmerTest’
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:stats’:
+
+    step
+
 Loading package: MASS
 
 Attaching package: ‘MASS’
@@ -40,6 +53,13 @@ Loading package: stringr
 Loading package: tibble
 Loading package: tidyr
 
+Attaching package: ‘tidyr’
+
+The following objects are masked from ‘package:Matrix’:
+
+    expand, pack, unpack
+
+
 ########################################
          END: ENVIRONMENT SETUP
 ########################################
@@ -49,11 +69,12 @@ Loading package: tidyr
 ########################################
 
 Importing data file from path:
-/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-19.RData
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20.RData
 
 Preview of data file...
 Rows: 5,676
-Columns: 67
+Columns: 68
+$ Order                            <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12…
 $ GlobalID                         <chr> "4NL2_1_44204", "4NL2_1_44205", "4NL2…
 $ AltGlobalID                      <chr> "4NL2_1_44204", "4NL2_1_44205", "4NL2…
 $ Site                             <fct> 4NL2, 4NL2, 4NL2, 4NL2, 4NL2, 4NL2, 4…
@@ -131,67 +152,128 @@ $ Color_ReHS                       <fct> Green, Green, Green, Green, Green, Gr�
 ########################################
 
 Fitting statistical model for variable: WaterDispHdRMS...
+Warning message:
+In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge with max|grad| = 0.00648808 (tol = 0.002, component 1)
 Printing model fit summary for variable: WaterDispHdRMS...
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: 
+WaterDispHdRMS ~ MidPointTempSetPointDeviationRMS + I(MidPointTempSetPointDeviationRMS^2) +  
+    (1 | Site) + (1 | Site:Marketing) + (0 + StdInventory + I(StdInventory^2) +  
+    I(StdInventory^3) + StdDays + I(StdDays^2) + I(StdDays^3) |      Site)
+   Data: master
 
-Call:
-lm(formula = WaterDispHdRMS ~ Days + I(Days^2) + I(Days^3) + 
-    MidPointTempSetPointDeviationRMS + I(MidPointTempSetPointDeviationRMS^2), 
-    data = master, na.action = na.exclude)
+REML criterion at convergence: 268.2
 
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.49137 -0.17531 -0.01177  0.13696  2.01516 
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.2739 -0.4571 -0.0101  0.3865  9.2287 
 
-Coefficients:
-                                        Estimate Std. Error t value Pr(>|t|)
-(Intercept)                            9.491e-02  1.829e-02   5.189  2.2e-07
-Days                                   1.566e-02  8.817e-04  17.755  < 2e-16
-I(Days^2)                              1.710e-05  1.073e-05   1.594    0.111
-I(Days^3)                             -3.315e-07  3.836e-08  -8.640  < 2e-16
-MidPointTempSetPointDeviationRMS       2.497e-02  2.326e-03  10.738  < 2e-16
-I(MidPointTempSetPointDeviationRMS^2) -1.008e-03  1.196e-04  -8.428  < 2e-16
-                                         
-(Intercept)                           ***
-Days                                  ***
-I(Days^2)                                
-I(Days^3)                             ***
-MidPointTempSetPointDeviationRMS      ***
-I(MidPointTempSetPointDeviationRMS^2) ***
+Random effects:
+ Groups         Name              Variance Std.Dev. Corr                   
+ Site.Marketing (Intercept)       0.03223  0.1795                          
+ Site           StdInventory      0.01467  0.1211                          
+                I(StdInventory^2) 0.02407  0.1551   -0.69                  
+                I(StdInventory^3) 0.03269  0.1808   -0.55  0.44            
+                StdDays           0.48605  0.6972    0.21  0.21 -0.72      
+                I(StdDays^2)      0.10105  0.3179   -0.32  0.11  0.92 -0.88
+                I(StdDays^3)      0.03064  0.1751   -0.11 -0.06  0.85 -0.88
+ Site.1         (Intercept)       0.05445  0.2333                          
+ Residual                         0.05899  0.2429                          
+      
+      
+      
+      
+      
+      
+      
+  0.95
+      
+      
+Number of obs: 5098, groups:  Site:Marketing, 12; Site, 6
+
+Fixed effects:
+                                        Estimate Std. Error         df t value
+(Intercept)                            1.448e+00  1.094e-01  5.054e+00  13.233
+MidPointTempSetPointDeviationRMS       1.477e-02  1.890e-03  1.657e+03   7.815
+I(MidPointTempSetPointDeviationRMS^2) -2.538e-04  9.675e-05  9.781e+02  -2.623
+                                      Pr(>|t|)    
+(Intercept)                           4.08e-05 ***
+MidPointTempSetPointDeviationRMS      9.71e-15 ***
+I(MidPointTempSetPointDeviationRMS^2)  0.00885 ** 
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.3279 on 5091 degrees of freedom
-  (579 observations deleted due to missingness)
-Multiple R-squared:  0.7321,	Adjusted R-squared:  0.7318 
-F-statistic:  2782 on 5 and 5091 DF,  p-value: < 2.2e-16
+Correlation of Fixed Effects:
+            (Intr) MPTSPD
+MdPnTSPDRMS -0.061       
+I(MPTSPDRMS  0.047 -0.899
+optimizer (nloptwrap) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00648808 (tol = 0.002, component 1)
 
+[1] 498.7154
 Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdRMS...
 
 Fitting statistical model for variable: WaterDispHdVC...
+boundary (singular) fit: see help('isSingular')
 Printing model fit summary for variable: WaterDispHdVC...
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: 
+WaterDispHdVC ~ AvgTempSetPointDeviationVC + I(AvgTempSetPointDeviationVC^2) +  
+    (1 | Site) + (1 | Site:Marketing) + (0 + StdInventory + I(StdInventory^2) +  
+    I(StdInventory^3) + StdDays + I(StdDays^2) + I(StdDays^3) |      Site)
+   Data: master
 
-Call: rlm(formula = WaterDispHdVC ~ Days + I(Days^2) + I(Days^3) + 
-    Inventory + AvgTempSetPointDeviationVC + Days:AvgTempSetPointDeviationVC + 
-    Days:Inventory + Inventory:AvgTempSetPointDeviationVC, data = master, 
-    na.action = na.exclude)
-Residuals:
-      Min        1Q    Median        3Q       Max 
--1.371506 -0.084272  0.004946  0.085650  1.112823 
+REML criterion at convergence: -2082
 
-Coefficients:
-                                     Value    Std. Error t value 
-(Intercept)                           -0.0376   0.0233    -1.6102
-Days                                   0.0242   0.0007    32.9239
-I(Days^2)                              0.0001   0.0000    14.2390
-I(Days^3)                              0.0000   0.0000   -30.7572
-Inventory                              0.0001   0.0000     9.3274
-AvgTempSetPointDeviationVC            -0.0191   0.0039    -4.9494
-Days:AvgTempSetPointDeviationVC        0.0001   0.0000     5.2646
-Days:Inventory                         0.0000   0.0000   -31.0966
-Inventory:AvgTempSetPointDeviationVC   0.0000   0.0000     8.8896
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-5.5464 -0.5277 -0.0006  0.4718  7.6711 
 
-Residual standard error: 0.1267 on 2152 degrees of freedom
-  (3515 observations deleted due to missingness)
+Random effects:
+ Groups         Name              Variance Std.Dev. Corr                   
+ Site.Marketing (Intercept)       0.01435  0.1198                          
+ Site           StdInventory      0.01801  0.1342                          
+                I(StdInventory^2) 0.06792  0.2606    0.26                  
+                I(StdInventory^3) 0.04345  0.2085    0.41  0.88            
+                StdDays           0.44768  0.6691   -0.39 -0.19 -0.37      
+                I(StdDays^2)      0.10852  0.3294    0.55  0.56  0.77 -0.87
+                I(StdDays^3)      0.02269  0.1506    0.56  0.44  0.71 -0.87
+ Site.1         (Intercept)       0.07275  0.2697                          
+ Residual                         0.03154  0.1776                          
+      
+      
+      
+      
+      
+      
+      
+  0.98
+      
+      
+Number of obs: 3748, groups:  Site:Marketing, 12; Site, 6
+
+Fixed effects:
+                                 Estimate Std. Error        df t value Pr(>|t|)
+(Intercept)                     1.436e+00  1.162e-01 5.033e+00  12.358 5.89e-05
+AvgTempSetPointDeviationVC      7.726e-03  1.643e-03 3.428e+03   4.702 2.68e-06
+I(AvgTempSetPointDeviationVC^2) 2.807e-04  8.425e-05 3.589e+03   3.332 0.000871
+                                   
+(Intercept)                     ***
+AvgTempSetPointDeviationVC      ***
+I(AvgTempSetPointDeviationVC^2) ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) ATSPDV
+AvgTmpSPDVC -0.049       
+I(ATSPDVC^2  0.040 -0.911
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
 Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdVC...
 
 ########################################
@@ -203,13 +285,13 @@ Extracting and saving residuals from model fit to new variable: ResidualWaterDis
 ########################################
 
 Exporting .RData object to path:
-/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-19-adjusted.RData
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20-adjusted.RData
 
 Exporting .csv file to path:
-/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-19-adjusted.csv
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20-adjusted.csv
 
 ########################################
       END: FILE CONFIGURATION
 ########################################
 
-[1] "The current script was completed on Thursday, August 11, 2022 at 04:45 PM"
+[1] "The current script was completed on Monday, August 22, 2022 at 05:52 PM"

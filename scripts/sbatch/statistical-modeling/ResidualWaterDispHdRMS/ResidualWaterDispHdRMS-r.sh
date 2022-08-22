@@ -12,6 +12,6 @@
 
 source activate r-sensors
 Rscript /group/deckerlab/cjgwx7/sensor-data/scripts/r/statistical-modeling/ResidualWaterDispHdRMS/ResidualWaterDispHdRMS.R \
---data /group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-19.RData \
+--data /group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20.RData \
 --fit-list /group/deckerlab/cjgwx7/sensor-data/scripts/r/statistical-modeling/ResidualWaterDispHdRMS/fit_list.csv \
 --results /group/deckerlab/cjgwx7/sensor-data/results/statistical-modeling/ResidualWaterDispHdRMS/ResidualWaterDispHdRMS-CrossValidation.xlsx

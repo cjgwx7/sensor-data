@@ -1,5 +1,4 @@
-/var/spool/slurmd/job25045970/slurm_script: line 13: activate: No such file or directory
-[1] "The current script was initialized on Thursday, August 11, 2022 at 02:36 PM"
+[1] "The current script was initialized on Monday, August 22, 2022 at 02:21 PM"
 
 ########################################
         BEGIN: ENVIRONMENT SETUP
@@ -63,23 +62,23 @@ First five rows of configured data set...
 First five rows of fit specification list...
 [[1]]
 WaterDispHdRMS ~ 1 + Days
-<environment: 0x55555834cf10>
+<environment: 0x55555834cca0>
 
 [[2]]
 WaterDispHdRMS ~ 1 + Days + I(Days^2)
-<environment: 0x55555834cf10>
+<environment: 0x55555834cca0>
 
 [[3]]
 WaterDispHdRMS ~ 1 + Days + I(Days^2) + I(Days^3)
-<environment: 0x55555834cf10>
+<environment: 0x55555834cca0>
 
 [[4]]
 WaterDispHdRMS ~ 1 + Inventory
-<environment: 0x55555834cf10>
+<environment: 0x55555834cca0>
 
 [[5]]
 WaterDispHdRMS ~ 1 + Inventory + I(Inventory^2)
-<environment: 0x55555834cf10>
+<environment: 0x55555834cca0>
 
 
 
@@ -92,22 +91,35 @@ WaterDispHdRMS ~ 1 + Inventory + I(Inventory^2)
 ########################################
 
 First five rows of results file...
-         HoldoutFold       SSE      SST         R2    R2_adj        MSE
-4NL2...1        4NL2 148.82737 515.1361 0.71109118 0.7105069 0.15002759
-BIBL...2        BIBL  56.59992 182.7657 0.69031437 0.6889561 0.12331137
-CON2...3        CON2  82.80129 385.0211 0.78494347 0.7845041 0.08431903
-G1TC...4        G1TC 257.49274 367.6082 0.29954571 0.2978394 0.31249119
-HOTC...5        HOTC 231.98332 238.5533 0.02754095 0.0254406 0.24971294
+         HoldoutFold       SSE      SST        R2     R2_adj        MSE
+4NL2...1        4NL2 148.83073 515.1361 0.7110847 0.71050041 0.15003097
+BIBL...2        BIBL  56.60103 182.7657 0.6903083 0.68894999 0.12331380
+CON2...3        CON2  82.80131 385.0211 0.7849434 0.78450409 0.08431905
+G1TC...4        G1TC 257.49960 367.7950 0.2998828 0.29817930 0.31212072
+HOTC...5        HOTC 231.97217 238.5533 0.0275877 0.02548745 0.24970094
               RMSE                       fit model
-4NL2...1 0.3873340 WaterDispHdRMS ~ 1 + Days    lm
-BIBL...2 0.3511572 WaterDispHdRMS ~ 1 + Days    lm
+4NL2...1 0.3873383 WaterDispHdRMS ~ 1 + Days    lm
+BIBL...2 0.3511606 WaterDispHdRMS ~ 1 + Days    lm
 CON2...3 0.2903774 WaterDispHdRMS ~ 1 + Days    lm
-G1TC...4 0.5590091 WaterDispHdRMS ~ 1 + Days    lm
-HOTC...5 0.4997129 WaterDispHdRMS ~ 1 + Days    lm
+G1TC...4 0.5586777 WaterDispHdRMS ~ 1 + Days    lm
+HOTC...5 0.4997008 WaterDispHdRMS ~ 1 + Days    lm
+
+`summarise()` has grouped output by 'fit'. You can override using the `.groups`
+argument.
+First five rows of sumarized results file...
+# A tibble: 5 × 4
+# Groups:   fit [3]
+  fit                                               model  `Mean RMSE` `SD RMSE`
+  <chr>                                             <chr>        <dbl>     <dbl>
+1 WaterDispHdRMS ~ 1 + Days                         lm           0.394    0.114 
+2 WaterDispHdRMS ~ 1 + Days                         robust       0.395    0.119 
+3 WaterDispHdRMS ~ 1 + Days + I(Days^2)             lm           0.347    0.0856
+4 WaterDispHdRMS ~ 1 + Days + I(Days^2)             robust       0.349    0.0859
+5 WaterDispHdRMS ~ 1 + Days + I(Days^2) + I(Days^3) lm           0.347    0.0889
 
 
 ########################################
          END: MODEL EVALUTION
 ########################################
 
-[1] "The current script was completed on Thursday, August 11, 2022 at 02:38 PM"
+[1] "The current script was completed on Monday, August 22, 2022 at 02:22 PM"

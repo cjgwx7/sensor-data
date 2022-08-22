@@ -148,6 +148,15 @@ cat("First five rows of results file...\n")
 head(results, 5)
 cat("\n")
 
+results <- results %>%
+    group_by(fit, model) %>%
+    summarise(`Mean RMSE` = mean(RMSE),
+              `SD RMSE` = sd(RMSE))
+
+cat("First five rows of sumarized results file...\n")
+head(results, 5)
+cat("\n")
+
 write.xlsx(results,
            file = args$results)
 

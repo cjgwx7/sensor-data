@@ -30,6 +30,8 @@ cat("Loading package: data.table\n")
 library(data.table)
 cat("Loading package: dplyr\n")
 library(dplyr)
+cat("Loading package: lmerTest\n")
+library(lmerTest)
 cat("Loading package: MASS\n")
 library(MASS)
 cat("Loading package: readr\n")
@@ -104,11 +106,17 @@ cat("\n")
 
 ###############################################################################
 
+master <- master %>%
+    mutate(StdDays = (Days - mean(Days, na.rm = TRUE)) / sd(Days, na.rm = TRUE),
+           StdInventory = (Inventory - mean(Inventory, na.rm = TRUE)) / sd(Inventory, na.rm = TRUE))
+
 ### WaterDispHdRMS
 cat("Fitting statistical model for variable: WaterDispHdRMS...\n")
-fit <- lm(WaterDispHdRMS ~ Days + I(Days^2) + I(Days^3) +
-                           MidPointTempSetPointDeviationRMS +
-                           I(MidPointTempSetPointDeviationRMS^2),
+fit <- lmer(WaterDispHdRMS ~ MidPointTempSetPointDeviationRMS +
+                             I(MidPointTempSetPointDeviationRMS^2) +
+                             (1 | Site) +
+                             (1 | Site:Marketing) +
+                             (0 + StdInventory + I(StdInventory^2) + I(StdInventory^3) + StdDays + I(StdDays^2) + I(StdDays^3) | Site),
           data = master,
           na.action = na.exclude)
 
@@ -118,18 +126,18 @@ summary(fit)
 cat("Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdRMS...\n")
 master_v2 <- master %>%
     mutate(ResidualWaterDispHdRMS = unname(residuals(fit))) %>%
-    dplyr::select(GlobalID:WaterDispHdRMS,
+    dplyr::select(Order:WaterDispHdRMS,
                   ResidualWaterDispHdRMS,
                   WaterDispVC:Color_ReHS)
 cat("\n")
 
 ### WaterDispHdVC
 cat("Fitting statistical model for variable: WaterDispHdVC...\n")
-fit <- rlm(WaterDispHdVC ~ Days + I(Days^2) + I(Days^3) + Inventory +
-                           AvgTempSetPointDeviationVC +
-                           Days:AvgTempSetPointDeviationVC +
-                           Days:Inventory +
-                           Inventory:AvgTempSetPointDeviationVC,
+fit <- lmer(WaterDispHdVC ~  AvgTempSetPointDeviationVC +
+                             I(AvgTempSetPointDeviationVC^2) +
+                             (1 | Site) +
+                             (1 | Site:Marketing) +
+                             (0 + StdInventory + I(StdInventory^2) + I(StdInventory^3) + StdDays + I(StdDays^2) + I(StdDays^3) | Site),
           data = master,
           na.action = na.exclude)
 
@@ -139,7 +147,7 @@ summary(fit)
 cat("Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdVC...\n")
 master_v3 <- master_v2 %>%
     mutate(ResidualWaterDispHdVC = unname(residuals(fit))) %>%
-    dplyr::select(GlobalID:WaterDispHdVC,
+    dplyr::select(Order:WaterDispHdVC,
                   ResidualWaterDispHdVC,
                   SetPointRMS:Color_ReHS)
 

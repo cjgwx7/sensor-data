@@ -5,7 +5,7 @@
 #SBATCH -c 1
 #SBATCH -A animalsci
 #SBATCH --mem 1G
-#SBATCH -t 00-00:10
+#SBATCH -t 00-01:00
 #SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/log/3-variable-adjustment-r-%j.out
 #SBATCH --mail-type END
 #SBATCH --mail-user cgrohmann@mail.missouri.edu

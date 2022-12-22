@@ -77,7 +77,7 @@ cat("\n")
 cat("\n")
 
 cat("Preview of data file...\n")
-glimpse(df)
+#glimpse(df)
 
 cat("Loading single variable function...\n")
 source("/group/deckerlab/cjgwx7/sensor-data/scripts/r/source/single_variable_negbin.R")
@@ -107,14 +107,16 @@ cat("\n")
 df <- df %>%
     filter(Days_Lag0 < 42) %>%
     rename(Days = Days_Lag0,
-           Inventory = Inventory_Lag0) %>%
+           Inventory = Inventory_Lag0,
+           TotalMortality = TotalMortality_Lag0) %>%
     select(-contains("Lag14"), -contains("Lag15"), -contains("Lag16"), -contains("Lag17"),
            -contains("Lag18"), -contains("Lag19"), -contains("Lag20"), -contains("Lag21")) %>%
     select(-contains("Days_Lag"), -contains("Inventory_Lag"), -contains("InventoryChange_Lag"),
-           -contains("TotalInventoryChange_Lag"), -contains("Marketing_Lag"))
+           -contains("TotalInventoryChange_Lag"), -contains("Marketing_Lag"),
+           -contains("TotalMortality_Lag"), -contains("WaterDispRMS_Lag"), -contains("WaterDispVC_Lag"))
 
 cat("Fitting regression models...\n")
-fit_df <- single_variable_negbin(df = df, y = "TotalMortality_Lag0", x_pos = c(16:19, 22:827), covariate = "Days", int = FALSE, random_effect = "Site_Turn")
+fit_df <- single_variable_negbin(df = df, y = "TotalMortality", x_pos = c(16:19, 22:758), covariate = "Days", int = FALSE, random_effect = "Site_Turn")
 
 #fit_df <- fit_df %>%
 #    mutate(OddsRatio = exp(BetaEstimate),

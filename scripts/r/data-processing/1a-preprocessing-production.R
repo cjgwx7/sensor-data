@@ -29,6 +29,8 @@ cat("Loading package: data.table\n")
 library(data.table)
 cat("Loading package: dplyr\n")
 library(dplyr)
+cat("Loading package: lubridate\n")
+library(lubridate)
 cat("Loading package: readr\n")
 library(readr)
 cat("Loading package: stringr\n")
@@ -64,99 +66,168 @@ cat("\n")
 
 ##### FILE INPUT/OUTPUT SPECS
 
-infile <- commandArgs(trailingOnly = TRUE)[1]
+infile1 <- commandArgs(trailingOnly = TRUE)[1]
 
-file_version <- sub(".*%_", "", infile)
-file_version <- sub(".csv$", "", file_version)
+file_root <- str_extract(infile1, pattern = "(?<=%).*(?=%)")
+file_root <- paste("%", file_root, "%", sep = "")
 
-outfile1 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/raw/production",
+file_version <- sub(".*%_", "", infile1)
+date_version <- as.Date(sub(".csv$", "", file_version))
+run_version <- paste(format(Sys.Date(), "%Y-%m-%d"),
+                     "-",
+                     format(Sys.time(), "%H-%M-%S"),
+                     sep = "")
+
+infile2 <- "/group/deckerlab/cjgwx7/sensor-data/data/production/raw/%COLUMN_KEY%.csv"
+
+outfile1 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/raw/",
+                  file_root,
+                  "-name-errors-",
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
+                  ".csv",
+                  sep = "")
+
+outfile2 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/raw/",
+                  file_root,
                   "-type-errors-",
-                  file_version,
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
                   ".csv",
                   sep = "")
 
-outfile2 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/processed/production",
-                  "-",
-                  file_version,
-                  ".csv",
-                  sep = "")
-
-outfile3 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-SummaryStats-PreQC-",
-                  file_version,
+outfile3 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/raw/",
+                  file_root,
+                  "-date-errors-",
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
                   ".csv",
                   sep = "")
 
 outfile4 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-SiteSummaryStats-PreQC-",
-                  file_version,
+                  "-SummaryStats-PreQC-",
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
                   ".csv",
                   sep = "")
 
 outfile5 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-SummaryStats-PostQC-",
-                  file_version,
+                  "-SiteSummaryStats-PreQC-",
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
                   ".csv",
                   sep = "")
 
 outfile6 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-SiteSummaryStats-PostQC-",
-                  file_version,
+                  "-SummaryStats-PostQC-",
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
                   ".csv",
                   sep = "")
 
 outfile7 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
-                  "-QC_Removals-",
-                  file_version,
+                  "-SiteSummaryStats-PostQC-",
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
                   ".csv",
                   sep = "")
 
-outfile8 <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/processed/production",
-                  "-",
-                  file_version,
-                  ".RData",
+outfile8 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
+                  "-SummaryStatsByPeriod-PostQC-",
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
+                  ".csv",
                   sep = "")
 
-col_names <- c("Site", "Room", "Date", "Days",
-              "Inventory", "Euth", "Dead",
-              "HiTempRMS", "LowTempRMS",
-              "SetPointRMS", "WaterDispRMS",
-              "AvgTempVC", "HiTempVC", "LowTempVC",
-              "SetPointVC", "WaterDispVC",
-              "Penicillin", "Dexamethasone",
-              "Ceftiofur", "Enroflaxin", "Tetracycline",
-              "Lincomycin", "OtherTreatments",
-              "TotalTreatments", "WaterMedications",
-              "WaterMedicationType", "Comments")
-col_types <- c(rep("c", 3), rep("n", 22), rep("c", 2))
+outfile9 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
+                  "-SiteSummaryStatsByPeriod-PostQC-",
+                  "DATE=", date_version, "_",
+                  "RUN=", run_version,
+                  ".csv",
+                  sep = "")
+
+outfile10 <- paste("/group/deckerlab/cjgwx7/sensor-data/results/exploratory-data-analysis/tables/production",
+                   "-QC-Removals-",
+                   "DATE=", date_version, "_",
+                   "RUN=", run_version,
+                   ".csv",
+                   sep = "")
+
+cat("Printing column name and type specifications...\n")
+column_specs <- read_csv(infile2,
+                         col_names = TRUE,
+                         col_types = rep("c", 3))
+print(column_specs, n = Inf)
+cat("\n")
+
+column_names_old <- column_specs %>%
+  pull(OriginalName)
+
+column_names_new <- column_specs %>%
+  pull(NewName)
+
+column_types <- column_specs %>%
+  pull(VariableType) %>%
+  paste(collapse = "")
 
 ##### FILE INPUT
-cat("Searching for variable type errors...\n")
+cat("Searching for column name specification errors...\n")
+validation_file <- suppressMessages(read_csv(infile1,
+                                    col_names = TRUE,
+                                    n_max = 0,
+                                    show_col_types = FALSE))
 
-production_prbs <- problems(read_csv(file = infile,
-                                     col_types = col_types,
+max_length <- max(c(length(colnames(validation_file)), length(column_names_old)))
+name_check <- tibble(`Correct Name` = c(column_names_old, rep(NA, max_length - length(column_names_old))),
+                     `Actual Name` = c(colnames(validation_file), rep(NA, max_length - length(colnames(validation_file))))) %>%
+  mutate(`Are they the same?` = `Correct Name` == `Actual Name`,
+         `Are they the same?` = ifelse(is.na(`Are they the same?`) == TRUE, FALSE, `Are they the same?`))
+name_check_vector <- name_check %>%
+  pull(`Are they the same?`)
+
+if (all(name_check_vector) == TRUE) {
+
+  cat("There are no variable name errors in the input file...\n")
+
+} else {
+
+  write_csv(name_check,
+            file = outfile1)
+
+  cat(paste("Variable name error(s) in input file.",
+            "Check 'production-name-errors' log file and fix mistake...\n"))
+
+}
+
+cat("\n")
+
+cat("Searching for variable type errors...\n")
+production_prbs <- problems(read_csv(file = infile1,
+                                     col_types = column_types,
                                      na = "NA",
                                      trim_ws = TRUE))
 
 if (nrow(production_prbs) == 0) {
 
-  cat("There are no variable type errors in the input file\n")
+  cat("There are no variable type errors in the input file...\n")
 
 } else {
 
   write_csv(production_prbs,
-            file = outfile1)
+            file = outfile2)
 
-  stop(paste("Variable type error(s) in input file.",
-             "Check 'production-type-errors' log file and fix mistake."))
+  cat(paste("Variable type error(s) in input file.",
+            "Check 'production-type-errors' log file and fix mistake...\n"))
 
 }
 
+cat("\n")
+
 cat("Reading in clean data file...\n")
 
-production <- suppressWarnings(read_csv(file = infile,
-                                        col_names = col_names,
-                                        col_types = col_types,
+production <- suppressWarnings(read_csv(file = infile1,
+                                        col_names = column_names_new,
+                                        col_types = column_types,
                                         na = "NA",
                                         trim_ws = TRUE,
                                         skip = 1))
@@ -187,6 +258,38 @@ cat("\n")
 ###############################################################################
 
 cat("Configuring Date variables...\n")
+
+#### DATE QUALITY CONTROL
+date_qc <- tibble(OriginalDate = unname(unlist(production[, "Date"]))) %>%
+  mutate(RowNumber = seq_len(nrow(.)),
+         NewDate = as.Date(OriginalDate, format = "%d-%b-%y"),
+         NewDate = ifelse(year(NewDate) < 2020, NA, NewDate),
+         QualityCheck = is.na(OriginalDate) == FALSE & is.na(NewDate) == TRUE)
+
+date_qc_vector <- date_qc %>%
+  pull(QualityCheck)
+
+if (any(date_qc_vector) == TRUE) {
+
+  write_csv(date_qc,
+            outfile3)
+
+  cat(paste("Date error(s) in input file.",
+              "Check 'date-errors' log file and fix mistake...\n"))
+
+} else {
+
+  cat("There are no date errors in the input file.\n")
+
+}
+
+if (all(name_check_vector) != TRUE | nrow(production_prbs) != 0 | any(date_qc_vector) == TRUE) {
+
+  stop("One or more errors during file input or type parsing. Check log files before proceeding.")
+
+}
+
+cat("\n")
 
 ##### DATE CONFIGURATION
 production_v2 <- production %>%
@@ -281,7 +384,12 @@ site_numeric_date <- production_v6 %>%
 production_v7 <- left_join(production_v6, site_numeric_date,
                            by = "Site_NumericDate") %>%
   mutate(Marketing = ifelse(Days >= 125 & abs(TotalInventoryChange) >= 150,
-                            1, NA)) %>%
+                            1, NA),
+        GrowthPeriod = ifelse(Days <= 42, "Early",
+                              ifelse(Days > 42 & Days <= 84, "Early Middle",
+                                     ifelse(Days > 84 & Days <= 126, "Late Middle", "Late"))),
+        GrowthPeriod = factor(GrowthPeriod,
+                              levels = c("Early", "Early Middle", "Late Middle", "Late"))) %>%
   group_by(Site_Room_Turn) %>%
   fill(Marketing, .direction = "down") %>%
   ungroup(.) %>%
@@ -322,7 +430,8 @@ production_v7 <- left_join(production_v6, site_numeric_date,
          AvgTempSetPointDeviationVC = AvgTempVC - SetPointVC,
          HiTempSetPointDeviationVC = HiTempVC - SetPointVC) %>%
   ### Rearrange variables
-  select(Order:Inventory, InventoryChange, TotalInventoryChange, Marketing,
+  select(Order:NumericDate, GrowthPeriod, Days,
+         Inventory, InventoryChange, TotalInventoryChange, Marketing,
          Euth, EuthProportion, Dead, DeadProportion,
          TotalMortality, TotalMortalityProportion,
          Penicillin, PenicillinProportion,
@@ -359,7 +468,7 @@ production_v7_long %>%
             SD = round(sd(Value, na.rm = TRUE), 6),
             Minimum = round(min(Value, na.rm = TRUE), 5),
             Maximum = round(max(Value, na.rm = TRUE), 5)) %>%
-  write_csv(file = outfile3)
+  write_csv(file = outfile4)
 
 production_v7_long %>%
   group_by(Site, Variable) %>%
@@ -370,7 +479,7 @@ production_v7_long %>%
             SD = round(sd(Value, na.rm = TRUE), 6),
             Minimum = round(min(Value, na.rm = TRUE), 5),
             Maximum = round(max(Value, na.rm = TRUE), 5)) %>%
-  write_csv(file = outfile4)
+  write_csv(file = outfile5)
 
 ###############################################################################
 
@@ -499,7 +608,7 @@ production_v9_long %>%
             SD = round(sd(Value, na.rm = TRUE), 6),
             Minimum = round(min(Value, na.rm = TRUE), 5),
             Maximum = round(max(Value, na.rm = TRUE), 5)) %>%
-  write_csv(file = outfile5)
+  write_csv(file = outfile6)
 
 production_v9_long %>%
   group_by(Site, Variable) %>%
@@ -510,7 +619,29 @@ production_v9_long %>%
             SD = round(sd(Value, na.rm = TRUE), 6),
             Minimum = round(min(Value, na.rm = TRUE), 5),
             Maximum = round(max(Value, na.rm = TRUE), 5)) %>%
-  write_csv(file = outfile6)
+  write_csv(file = outfile7)
+
+production_v9_long %>%
+  group_by(GrowthPeriod, Variable) %>%
+  summarise(N = n(),
+            N_missing = sum(is.na(Value)),
+            Mean = round(mean(Value, na.rm = TRUE), 5),
+            Median = round(median(Value, na.rm = TRUE), 5),
+            SD = round(sd(Value, na.rm = TRUE), 6),
+            Minimum = round(min(Value, na.rm = TRUE), 5),
+            Maximum = round(max(Value, na.rm = TRUE), 5)) %>%
+  write_csv(file = outfile8)
+
+production_v9_long %>%
+  group_by(Site, GrowthPeriod, Variable) %>%
+  summarise(N = n(),
+            N_missing = sum(is.na(Value)),
+            Mean = round(mean(Value, na.rm = TRUE), 5),
+            Median = round(median(Value, na.rm = TRUE), 5),
+            SD = round(sd(Value, na.rm = TRUE), 6),
+            Minimum = round(min(Value, na.rm = TRUE), 5),
+            Maximum = round(max(Value, na.rm = TRUE), 5)) %>%
+  write_csv(file = outfile9)
 
 removals <- left_join(production_v7_long,
                       production_v9_long %>%
@@ -521,7 +652,7 @@ removals <- left_join(production_v7_long,
   filter(FLAG == TRUE) %>%
   select(Order:Value.x) %>%
   rename(Value = Value.x) %>%
-  write_csv(file = outfile7)
+  write_csv(file = outfile10)
 
 ###############################################################################
 
@@ -545,14 +676,32 @@ cat("\n")
 
 ###############################################################################
 
+maxdate_version <- max(production_v9$CalendarDate)
+
+outfile_final_csv <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/processed/production",
+                           "-",
+                           "DATE=", date_version, "_",
+                           "RUN=", run_version, "_",
+                           "MAXDATE=", maxdate_version,
+                           ".csv",
+                           sep = "")
+
+outfile_final_rdata <- paste("/group/deckerlab/cjgwx7/sensor-data/data/production/processed/production",
+                             "-",
+                             "DATE=", date_version, "_",
+                             "RUN=", run_version, "_",
+                             "MAXDATE=", maxdate_version,
+                             ".RData",
+                             sep = "")
+
 cat("Printing clean dataset structure...\n")
 glimpse(production_v9)
 
 cat("Exporting clean dataset...\n")
 write_csv(production_v9,
-          file = outfile2)
+          file = outfile_final_csv)
 save(production_v9,
-     file = outfile8)
+     file = outfile_final_rdata)
 
 ###############################################################################
 

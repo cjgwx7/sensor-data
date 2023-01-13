@@ -1,0 +1,231 @@
+[1] "The current script was initialized on Thursday, January 12, 2023 at 07:49 PM"
+
+########################################
+        BEGIN: ENVIRONMENT SETUP
+########################################
+
+Loading package: data.table
+Loading package: dplyr
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:data.table’:
+
+    between, first, last
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading package: readr
+Loading package: stringr
+Loading package: tibble
+Loading package: tidyr
+
+########################################
+         END: ENVIRONMENT SETUP
+########################################
+
+########################################
+     BEGIN: DIRECTORY CONFIGURATION
+########################################
+
+Unzipping raw data files
+[1] TRUE
+
+########################################
+      END: DIRECTORY CONFIGURATION
+########################################
+
+########################################
+         BEGIN: READ IN DATA
+########################################
+
+Reading in device files for each site...
+Binding site device files into a single file...
+Printing raw data set structure...
+Rows: 22,252
+Columns: 6
+$ Device       <chr> "Maschhoff_4NL2_RM1_E", "Maschhoff_4NL2_RM1_E", "Maschhof…
+$ CalendarDate <chr> "2021-12-21", "2021-12-22", "2021-12-23", "2021-12-24", "…
+$ Temp_ReHS    <dbl> 26.0, 26.0, 25.5, 26.0, 26.0, 25.0, 25.0, 24.5, 24.0, 24.…
+$ Color_ReHS   <chr> "green", "green", "green", "green", "green", "green", "gr…
+$ ReHS         <dbl> 98, 98, 97, 96, 98, 99, 94, 94, 95, 96, 96, 97, 97, 87, 9…
+$ Site         <chr> "4NL2", "4NL2", "4NL2", "4NL2", "4NL2", "4NL2", "4NL2", "…
+
+########################################
+         END: READ IN DATA
+########################################
+
+########################################
+       BEGIN: DATA PROCESSING
+########################################
+
+Processing data...
+Printing overall summary statistics before QC...
+   Temp_ReHS           ReHS        Color_ReHS  
+ Min.   : 43.88   Min.   : 8.60   Green :4279  
+ 1st Qu.: 68.60   1st Qu.:83.60   Red   : 173  
+ Median : 72.95   Median :94.33   Yellow: 239  
+ Mean   : 73.30   Mean   :86.82   NA's  : 647  
+ 3rd Qu.: 78.44   3rd Qu.:97.20                
+ Max.   :140.90   Max.   :99.00                
+ NA's   :589      NA's   :647                  
+Printing site summary statistics before QC...
+cough_v2$Site: 4NL2
+   Temp_ReHS          ReHS        Color_ReHS 
+ Min.   :61.10   Min.   :70.67   Green :350  
+ 1st Qu.:69.88   1st Qu.:91.08   Red   :  0  
+ Median :71.90   Median :96.33   Yellow:  0  
+ Mean   :73.24   Mean   :93.50   NA's  :  6  
+ 3rd Qu.:75.20   3rd Qu.:97.67               
+ Max.   :87.50   Max.   :99.00               
+ NA's   :2       NA's   :6                   
+------------------------------------------------------------ 
+cough_v2$Site: BIBL
+   Temp_ReHS           ReHS        Color_ReHS 
+ Min.   : 49.28   Min.   :34.80   Green :870  
+ 1st Qu.: 69.98   1st Qu.:96.00   Red   :  4  
+ Median : 75.50   Median :97.33   Yellow: 13  
+ Mean   : 74.85   Mean   :95.14   NA's  :113  
+ 3rd Qu.: 80.42   3rd Qu.:98.00               
+ Max.   :110.66   Max.   :99.00               
+ NA's   :109      NA's   :113                 
+------------------------------------------------------------ 
+cough_v2$Site: CON2
+   Temp_ReHS           ReHS        Color_ReHS 
+ Min.   : 50.30   Min.   :17.33   Green :946  
+ 1st Qu.: 68.00   1st Qu.:81.00   Red   : 17  
+ Median : 72.95   Median :92.33   Yellow: 46  
+ Mean   : 73.57   Mean   :86.58   NA's  :103  
+ 3rd Qu.: 79.10   3rd Qu.:96.33               
+ Max.   :140.90   Max.   :99.00               
+ NA's   :92       NA's   :103                 
+------------------------------------------------------------ 
+cough_v2$Site: G1TC
+   Temp_ReHS           ReHS        Color_ReHS  
+ Min.   : 43.88   Min.   :63.80   Green :1023  
+ 1st Qu.: 70.88   1st Qu.:93.25   Red   :   0  
+ Median : 73.58   Median :96.00   Yellow:   0  
+ Mean   : 74.21   Mean   :94.62   NA's  :  63  
+ 3rd Qu.: 78.62   3rd Qu.:97.50                
+ Max.   :122.67   Max.   :99.00                
+ NA's   :45       NA's   :63                   
+------------------------------------------------------------ 
+cough_v2$Site: HOTC
+   Temp_ReHS           ReHS        Color_ReHS 
+ Min.   : 48.20   Min.   : 8.60   Green :618  
+ 1st Qu.: 67.46   1st Qu.:58.10   Red   :118  
+ Median : 72.12   Median :76.80   Yellow:107  
+ Mean   : 72.66   Mean   :71.69   NA's  :145  
+ 3rd Qu.: 77.90   3rd Qu.:92.60               
+ Max.   :127.58   Max.   :99.00               
+ NA's   :136      NA's   :145                 
+------------------------------------------------------------ 
+cough_v2$Site: TPLJ
+   Temp_ReHS          ReHS        Color_ReHS 
+ Min.   :58.10   Min.   :18.00   Green :472  
+ 1st Qu.:63.80   1st Qu.:67.67   Red   : 34  
+ Median :69.20   Median :87.00   Yellow: 73  
+ Mean   :69.83   Mean   :78.75   NA's  :217  
+ 3rd Qu.:75.50   3rd Qu.:93.67               
+ Max.   :87.80   Max.   :99.00               
+ NA's   :205     NA's   :217                 
+Performing quality control...
+Printing overall summary statistics after QC...
+   Temp_ReHS           ReHS        Color_ReHS  
+ Min.   : 46.04   Min.   : 8.60   Green :4279  
+ 1st Qu.: 68.60   1st Qu.:83.60   Red   : 173  
+ Median : 72.95   Median :94.33   Yellow: 239  
+ Mean   : 73.24   Mean   :86.82   NA's  : 647  
+ 3rd Qu.: 78.44   3rd Qu.:97.20                
+ Max.   :103.82   Max.   :99.00                
+ NA's   :596      NA's   :647                  
+Printing site summary statistics after QC...
+cough_v3$Site: 4NL2
+   Temp_ReHS          ReHS        Color_ReHS 
+ Min.   :61.10   Min.   :70.67   Green :350  
+ 1st Qu.:69.88   1st Qu.:91.08   Red   :  0  
+ Median :71.90   Median :96.33   Yellow:  0  
+ Mean   :73.24   Mean   :93.50   NA's  :  6  
+ 3rd Qu.:75.20   3rd Qu.:97.67               
+ Max.   :87.50   Max.   :99.00               
+ NA's   :2       NA's   :6                   
+------------------------------------------------------------ 
+cough_v3$Site: BIBL
+   Temp_ReHS           ReHS        Color_ReHS 
+ Min.   : 49.28   Min.   :34.80   Green :870  
+ 1st Qu.: 69.98   1st Qu.:96.00   Red   :  4  
+ Median : 75.50   Median :97.33   Yellow: 13  
+ Mean   : 74.81   Mean   :95.14   NA's  :113  
+ 3rd Qu.: 80.42   3rd Qu.:98.00               
+ Max.   :103.82   Max.   :99.00               
+ NA's   :110      NA's   :113                 
+------------------------------------------------------------ 
+cough_v3$Site: CON2
+   Temp_ReHS          ReHS        Color_ReHS 
+ Min.   :50.30   Min.   :17.33   Green :946  
+ 1st Qu.:68.00   1st Qu.:81.00   Red   : 17  
+ Median :72.95   Median :92.33   Yellow: 46  
+ Mean   :73.41   Mean   :86.58   NA's  :103  
+ 3rd Qu.:79.10   3rd Qu.:96.33               
+ Max.   :89.60   Max.   :99.00               
+ NA's   :95      NA's   :103                 
+------------------------------------------------------------ 
+cough_v3$Site: G1TC
+   Temp_ReHS          ReHS        Color_ReHS  
+ Min.   :46.04   Min.   :63.80   Green :1023  
+ 1st Qu.:70.88   1st Qu.:93.25   Red   :   0  
+ Median :73.58   Median :96.00   Yellow:   0  
+ Mean   :74.19   Mean   :94.62   NA's  :  63  
+ 3rd Qu.:78.62   3rd Qu.:97.50                
+ Max.   :95.90   Max.   :99.00                
+ NA's   :47      NA's   :63                   
+------------------------------------------------------------ 
+cough_v3$Site: HOTC
+   Temp_ReHS          ReHS        Color_ReHS 
+ Min.   :48.20   Min.   : 8.60   Green :618  
+ 1st Qu.:67.46   1st Qu.:58.10   Red   :118  
+ Median :71.96   Median :76.80   Yellow:107  
+ Mean   :72.60   Mean   :71.69   NA's  :145  
+ 3rd Qu.:77.90   3rd Qu.:92.60               
+ Max.   :95.45   Max.   :99.00               
+ NA's   :137     NA's   :145                 
+------------------------------------------------------------ 
+cough_v3$Site: TPLJ
+   Temp_ReHS          ReHS        Color_ReHS 
+ Min.   :58.10   Min.   :18.00   Green :472  
+ 1st Qu.:63.80   1st Qu.:67.67   Red   : 34  
+ Median :69.20   Median :87.00   Yellow: 73  
+ Mean   :69.83   Mean   :78.75   NA's  :217  
+ 3rd Qu.:75.50   3rd Qu.:93.67               
+ Max.   :87.80   Max.   :99.00               
+ NA's   :205     NA's   :217                 
+Printing clean dataset...
+Rows: 5,338
+Columns: 5
+$ GlobalID   <chr> "4NL2_1_44551", "4NL2_1_44552", "4NL2_1_44553", "4NL2_1_445…
+$ Temp_ReHS  <dbl> 77.6, 77.9, 77.0, 77.6, 77.6, 75.8, 76.4, 74.9, 74.6, 75.2,…
+$ ReHS       <dbl> 97.00000, 97.66667, 96.33333, 93.66667, 91.66667, 97.00000,…
+$ Color_ReHS <fct> Green, Green, Green, Green, Green, Green, Green, Green, Gre…
+$ Site       <chr> "4NL2", "4NL2", "4NL2", "4NL2", "4NL2", "4NL2", "4NL2", "4N…
+
+########################################
+        END: DATA PROCESSING
+########################################
+
+########################################
+         BEGIN: FILE EXPORT
+########################################
+
+Exporting cough data sets...
+
+########################################
+           END: FILE EXPORT
+########################################
+
+[1] "The current script was completed on Thursday, January 12, 2023 at 07:49 PM"

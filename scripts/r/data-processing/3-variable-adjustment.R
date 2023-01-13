@@ -45,6 +45,8 @@ library(tidyr)
 
 rm(list = ls())
 
+source("/group/deckerlab/cjgwx7/sensor-data/scripts/r/source/find_high_mortality.R")
+
 ###############################################################################
 
 cat("\n")
@@ -106,86 +108,224 @@ cat("\n")
 
 ###############################################################################
 
-master_std <- master %>%
-    mutate(LogInventory = log(Inventory),
-           StdDays = (Days - mean(Days, na.rm = TRUE)) / sd(Days, na.rm = TRUE),
-           StdInventory = (Inventory - mean(Inventory, na.rm = TRUE)) / sd(Inventory, na.rm = TRUE),
-           StdLogInventory = (LogInventory - mean(LogInventory, na.rm = TRUE)) / sd(LogInventory, na.rm = TRUE))
+master <- master %>%
+    mutate(StdDays = (Days - mean(Days, na.rm = TRUE)) / sd(Days, na.rm = TRUE))
+
+master_e <- master %>%
+    filter(GrowthPeriod == "Early")
+
+master_em <- master %>%
+     filter(GrowthPeriod == "Early Middle")
+
+master_lm <- master %>%
+    filter(GrowthPeriod == "Late Middle")
+
+master_l <- master %>%
+    filter(GrowthPeriod == "Late")
 
 ### WaterDispHdRMS
-cat("Fitting statistical model for variable: WaterDispHdRMS...\n")
-fit <- lmer(WaterDispHdRMS ~ MidPointTempSetPointDeviationRMS +
-                             I(MidPointTempSetPointDeviationRMS^2) +
-                             (1 | Site) +
-                             (1 | Site:Marketing) +
-                             (0 + StdInventory + I(StdInventory^2) + I(StdInventory^3) + StdDays + I(StdDays^2) + I(StdDays^3) | Site),
-          data = master_std,
-          na.action = na.exclude)
+#cat("Fitting statistical model for variable: WaterDispHdRMS...\n")
+#fit <- lmer(WaterDispHdRMS ~ MidPointTempSetPointDeviationRMS +
+#                             I(MidPointTempSetPointDeviationRMS^2) +
+#                             (1 | Site) +
+#                             (1 | Site:Marketing) +
+#                             (0 + StdInventory + I(StdInventory^2) + I(StdInventory^3) + StdDays + I(StdDays^2) + I(StdDays^3) | Site),
+#          data = master_std,
+#          na.action = na.exclude)
 
-cat("Printing model fit summary for variable: WaterDispHdRMS...\n")
-summary(fit)
+#cat("Printing model fit summary for variable: WaterDispHdRMS...\n")
+#summary(fit)
 
-cat("Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdRMS...\n")
-master_v2 <- master %>%
-    mutate(ResidualWaterDispHdRMS = unname(residuals(fit))) %>%
-    dplyr::select(Order:WaterDispHdRMS,
-                  ResidualWaterDispHdRMS,
-                  WaterDispVC:Color_ReHS)
-cat("\n")
+#cat("Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdRMS...\n")
+#master_v2 <- master %>%
+#    mutate(ResidualWaterDispHdRMS = unname(residuals(fit))) %>%
+#    dplyr::select(Order:WaterDispHdRMS,
+#                  ResidualWaterDispHdRMS,
+#                  WaterDispVC:Color_ReHS)
+#cat("\n")
 
 ### WaterDispHdVC
-cat("Fitting statistical model for variable: WaterDispHdVC...\n")
-fit <- lmer(WaterDispHdVC ~  AvgTempSetPointDeviationVC +
-                             I(AvgTempSetPointDeviationVC^2) +
-                             (1 | Site) +
-                             (1 | Site:Marketing) +
-                             (0 + StdInventory + I(StdInventory^2) + I(StdInventory^3) + StdDays + I(StdDays^2) + I(StdDays^3) | Site),
-          data = master_std,
-          na.action = na.exclude)
+#cat("Fitting statistical model for variable: WaterDispHdVC...\n")
+#fit <- lmer(WaterDispHdVC ~  AvgTempSetPointDeviationVC +
+#                             I(AvgTempSetPointDeviationVC^2) +
+#                             (1 | Site) +
+#                             (1 | Site:Marketing) +
+#                             (0 + StdInventory + I(StdInventory^2) + I(StdInventory^3) + StdDays + I(StdDays^2) + I(StdDays^3) | Site),
+#          data = master_std,
+#          na.action = na.exclude)
 
-cat("Printing model fit summary for variable: WaterDispHdVC...\n")
-summary(fit)
+#cat("Printing model fit summary for variable: WaterDispHdVC...\n")
+#summary(fit)
 
-cat("Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdVC...\n")
-master_v3 <- master_v2 %>%
-    mutate(ResidualWaterDispHdVC = unname(residuals(fit))) %>%
-    dplyr::select(Order:WaterDispHdVC,
-                  ResidualWaterDispHdVC,
-                  SetPointRMS:Color_ReHS)
-cat("\n")
+#cat("Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdVC...\n")
+#master_v3 <- master_v2 %>%
+#    mutate(ResidualWaterDispHdVC = unname(residuals(fit))) %>%
+#    dplyr::select(Order:WaterDispHdVC,
+#                  ResidualWaterDispHdVC,
+#                  SetPointRMS:Color_ReHS)
+#cat("\n")
 
 ### Total Mortality
-cat("Fitting statistical model for variable: TotalMortality...\n")
-fit <- glmer.nb(TotalMortality ~ StdLogInventory +
+cat(paste("Fitting mixed (FE: offset(log(Inventory))) RE: Cubic Days and Site_Turn) ",
+          "negative binomial model for variable: TotalMortality...\n",
+          sep = ""))
+fit <- glmer.nb(TotalMortality ~ offset(log(Inventory)) +
                                  (1 + StdDays + I(StdDays^2) + I(StdDays^3) | Site_Turn),
-                data = master_std,
+                data = master,
                 na.action = na.exclude)
+cat("\n")
 
 cat("Printing model fit summary for variable: TotalMortality...\n")
 summary(fit)
-
-cat("Extracting and saving residuals from model fit to new variable: ResidualWaterDispHdVC...\n")
-master_v4 <- master_v3 %>%
-    mutate(ResidualTotalMortality = unname(residuals(fit, type = "response"))) %>%
-    dplyr::select(Order:TotalMortalityProportion,
-                  ResidualTotalMortality,
-                  Penicillin:Color_ReHS)
-
-MEDIAN <- median(master_v4$ResidualTotalMortality, na.rm = TRUE) # nolint
-MAD <- mad(master_v4$ResidualTotalMortality, na.rm = TRUE) # nolint
-
-master_v5 <- master_v4 %>%
-    mutate(StdResidualTotalMortality = (ResidualTotalMortality - MEDIAN) / MAD,
-           HighMortalityDay = ifelse(StdResidualTotalMortality >= 2, 1, 0),
-           ExtremeHighMortalityDay = ifelse(StdResidualTotalMortality >= 3, 1, 0)) %>%
-    dplyr::select(Order:ResidualTotalMortality,
-                  StdResidualTotalMortality,
-                  HighMortalityDay:ExtremeHighMortalityDay,
-                  Penicillin:Color_ReHS)
-
 cat("\n")
 
-master <- master_v5
+cat("Extracting and saving residuals from model fit to new variable: ResidualTotalMortality_CubicDaysSiteTurn...\n")
+master <- master %>%
+    mutate(ResidualTotalMortality_CubicDaysSiteTurn = unname(residuals(fit, type = "response")))
+cat("----------------------------------------------------------------------------------------------\n")
+
+###################### NEW MODEL
+
+cat(paste("Fitting mixed (FE: offset(log(Inventory)) & GrowthPeriod RE: Site_Turn) ",
+          "negative binomial model for variable: TotalMortality...\n",
+          sep = ""))
+fit <- glmer.nb(TotalMortality ~ offset(log(Inventory)) + GrowthPeriod +
+                                 (1 | Site_Turn),
+                data = master,
+                na.action = na.exclude)
+cat("\n")
+
+cat("Printing model fit summary for variable: TotalMortality...\n")
+summary(fit)
+cat("\n")
+
+cat("Extracting and saving residuals from model fit to new variable: ResidualTotalMortality_FixedGrowthPeriodRandomSiteTurn...\n")
+master <- master %>%
+    mutate(ResidualTotalMortality_FixedGrowthPeriodRandomSiteTurn = unname(residuals(fit, type = "response")))
+cat("----------------------------------------------------------------------------------------------\n")
+
+###################### NEW MODEL
+
+cat(paste("Fitting fixed [FE: offset(log(Inventory))] ",
+          "negative binomial model for variable: TotalMortality...\n",
+          sep = ""))
+fit <- glm.nb(TotalMortality ~ offset(log(Inventory)) + GrowthPeriod,
+              data = master,
+              na.action = na.exclude)
+cat("\n")
+
+cat("Printing model fit summary for variable: TotalMortality...\n")
+summary(fit)
+cat("\n")
+
+cat("Extracting and saving residuals from model fit to new variable: ResidualTotalMortality_FixedGrowthPeriod...\n")
+master <- master %>%
+    mutate(ResidualTotalMortality_FixedGrowthPeriod = unname(residuals(fit, type = "response")))
+cat("----------------------------------------------------------------------------------------------\n")
+
+###################### NEW MODEL
+
+cat(paste("Fitting mixed [FE: offset(log(Inventory)) & RE: Site_Turn] ",
+          "negative binomial model for variable: TotalMortality (Early)...\n",
+          sep = ""))
+fit <- glmer.nb(TotalMortality ~ offset(log(Inventory)) +
+                    (1 | Site_Turn),
+                data = master_e,
+                na.action = na.exclude)
+cat("\n")
+
+cat("Printing model fit summary for variable: TotalMortality...\n")
+summary(fit)
+cat("\n")
+
+cat("Extracting and saving residuals from model fit to new variable: ResidualTotalMortality_E...\n")
+master_e <- master_e %>%
+    mutate(ResidualTotalMortality_E = unname(residuals(fit, type = "response"))) %>%
+    dplyr::select(Order, ResidualTotalMortality_E)
+cat("----------------------------------------------------------------------------------------------\n")
+
+###################### NEW MODEL
+
+cat(paste("Fitting mixed [FE: offset(log(Inventory)) & RE: Site_Turn] ",
+          "negative binomial model for variable: TotalMortality (Early Middle)...\n",
+          sep = ""))
+fit <- glmer.nb(TotalMortality ~ offset(log(Inventory)) +
+                    (1 | Site_Turn),
+                data = master_em,
+                na.action = na.exclude)
+cat("\n")
+
+cat("Printing model fit summary for variable: TotalMortality...\n")
+summary(fit)
+cat("\n")
+
+cat("Extracting and saving residuals from model fit to new variable: ResidualTotalMortality_EM...\n")
+master_em <- master_em %>%
+    mutate(ResidualTotalMortality_EM = unname(residuals(fit, type = "response"))) %>%
+    dplyr::select(Order, ResidualTotalMortality_EM)
+cat("----------------------------------------------------------------------------------------------\n")
+
+###################### NEW MODEL
+
+cat(paste("Fitting mixed [FE: offset(log(Inventory)) & RE: Site_Turn] ",
+          "negative binomial model for variable: TotalMortality (Late Middle)...\n",
+          sep = ""))
+fit <- glmer.nb(TotalMortality ~ offset(log(Inventory)) +
+                    (1 | Site_Turn),
+                data = master_lm,
+                na.action = na.exclude)
+cat("\n")
+
+cat("Printing model fit summary for variable: TotalMortality...\n")
+summary(fit)
+cat("\n")
+
+cat("Extracting and saving residuals from model fit to new variable: ResidualTotalMortality_LM...\n")
+master_lm <- master_lm %>%
+    mutate(ResidualTotalMortality_LM = unname(residuals(fit, type = "response"))) %>%
+    dplyr::select(Order, ResidualTotalMortality_LM)
+cat("----------------------------------------------------------------------------------------------\n")
+
+###################### NEW MODEL
+
+cat(paste("Fitting mixed [FE: offset(log(Inventory)) & RE: Site_Turn] ",
+          "negative binomial model for variable: TotalMortality (Late)...\n",
+          sep = ""))
+fit <- glmer.nb(TotalMortality ~ offset(log(Inventory)) +
+                    (1 | Site_Turn),
+                data = master_l,
+                na.action = na.exclude)
+cat("\n")
+
+cat("Printing model fit summary for variable: TotalMortality...\n")
+summary(fit)
+cat("\n")
+
+cat("Extracting and saving residuals from model fit to new variable: ResidualTotalMortality_L...\n")
+master_l <- master_l %>%
+    mutate(ResidualTotalMortality_L = unname(residuals(fit, type = "response"))) %>%
+    dplyr::select(Order, ResidualTotalMortality_L)
+cat("----------------------------------------------------------------------------------------------\n")
+
+cat("Finding mortality events...\n")
+master <- master %>%
+    left_join(., master_e, by = "Order") %>%
+    left_join(., master_em, by = "Order") %>%
+    left_join(., master_lm, by = "Order") %>%
+    left_join(., master_l, by = "Order") %>%
+    mutate(EHMD_CubicDays = find_high_mortality(ResidualTotalMortality_CubicDaysSiteTurn, 3),
+           EHMD_GPST = find_high_mortality(ResidualTotalMortality_FixedGrowthPeriodRandomSiteTurn, 3),
+           EHMD_GP = find_high_mortality(ResidualTotalMortality_FixedGrowthPeriod, 3),
+           EHMD_E = find_high_mortality(ResidualTotalMortality_E, 3),
+           EHMD_EM = find_high_mortality(ResidualTotalMortality_EM, 3),
+           EHMD_LM = find_high_mortality(ResidualTotalMortality_LM, 3),
+           EHMD_L = find_high_mortality(ResidualTotalMortality_L, 3),
+           EHMD_WGP = coalesce(EHMD_E, EHMD_EM, EHMD_LM, EHMD_L)) %>%
+    dplyr::select(Order:TotalMortalityProportion, EHMD_CubicDays:EHMD_GP, EHMD_WGP, Penicillin:Color_ReHS) %>%
+    mutate(Color_ReHS_Yellow = ifelse(Color_ReHS == "Yellow", 1, 0),
+           Color_ReHS_Red = ifelse(Color_ReHS == "Red", 1, 0)) %>%
+    dplyr::select(Order:ReHS, Color_ReHS_Yellow:Color_ReHS_Red) %>%
+    mutate(across(Days:Color_ReHS_Red, as.double))
 
 ###############################################################################
 

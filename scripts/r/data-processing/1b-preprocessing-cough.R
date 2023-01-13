@@ -241,9 +241,26 @@ cat("\n")
 ###############################################################################
 
 cat("Exporting cough data sets...\n")
+received_date <- as.Date(date, format = "%m-%d-%Y")
+run_date <- paste(format(Sys.Date(), "%Y-%m-%d"),
+                  "-",
+                  format(Sys.time(), "%H-%M-%S"),
+                  sep = "")
+max_date <- unname(unlist(cough_v3[, "GlobalID"]))
+max_date <- max(as.integer(substring(max_date, 8, 12)))
+max_date <- as.Date(max_date, origin = "1899-12-30")
+
 export_root_dir <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/processed"
-export_filename <- paste("cough-", date, ".csv", sep = "")
-export_filename_rdata <- paste("cough-", date, ".RData", sep = "")
+export_filename <- paste("cough-",
+                         "DATE=", received_date, "_",
+                         "RUN=", run_date, "_",
+                         "MAXDATE=", max_date,
+                         ".csv", sep = "")
+export_filename_rdata <- paste("cough-",
+                         "DATE=", received_date, "_",
+                         "RUN=", run_date, "_",
+                         "MAXDATE=", max_date,
+                         ".RData", sep = "")
 
 write_csv(cough_v3,
           file = file.path(export_root_dir, export_filename))

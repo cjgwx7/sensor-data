@@ -60,33 +60,58 @@ cat("\n")
 
 ###############################################################################
 
+#### Extract all possible file names: PRODUCTION
 production_files <- list.files("/group/deckerlab/cjgwx7/sensor-data/data/production/processed",
                                pattern = "\\.RData$")
-production_dates <- unlist(lapply(production_files, substring, 12))
-production_dates <- as.Date(unlist(lapply(production_dates, substring, 1, 10)),
-                            format = "%m-%d-%Y")
-production_input <- production_files[which.max(production_dates)]
+#### Find the maximum MAXDATE
+production_dates <- str_extract(production_files, pattern = "(?<=MAXDATE=).*(?=.RData)")
+production_dates <- as.Date(production_dates)
+production_max_date <- max(production_dates)
+#### Subset files with maximum MAXDATE
+production_input <- grep(paste("MAXDATE=", production_max_date, sep = ""), production_files, value = TRUE)
+#### Find maximum RUN date
+production_rundates <- str_extract(production_input, pattern = "(?<=RUN=).*(?=_MAXDATE)")
+production_rundates <- as.POSIXct(production_rundates, format = "%Y-%m-%d-%H-%M-%S")
+production_max_rundate <- as.character(max(production_rundates))
+production_max_rundate <- gsub(" ", "-", production_max_rundate)
+production_max_rundate <- gsub(":", "-", production_max_rundate)
+#### Subset files with maximum RUN datetime from production_input
+production_input <- grep(paste("RUN=", production_max_rundate, sep = ""), production_input, value = TRUE)
+#### Make target file path
 production_root <- "/group/deckerlab/cjgwx7/sensor-data/data/production/processed"
 production_target <- file.path(production_root, production_input)
 
-
+#### Extract all possible file names: COUGH
 cough_files <- list.files("/group/deckerlab/cjgwx7/sensor-data/data/cough/processed",
-                               pattern = "\\.RData$")
-cough_dates <- unlist(lapply(cough_files, substring, 7))
-cough_dates <- as.Date(unlist(lapply(cough_dates, substring, 1, 10)),
-                       format = "%m-%d-%Y")
-cough_input <- cough_files[which.max(cough_dates)]
+                          pattern = "\\.RData$")
+#### Find the maximum MAXDATE
+cough_dates <- str_extract(cough_files, pattern = "(?<=MAXDATE=).*(?=.RData)")
+cough_dates <- as.Date(cough_dates)
+cough_max_date <- max(cough_dates)
+#### Subset files with maximum MAXDATE
+cough_input <- grep(paste("MAXDATE=", cough_max_date, sep = ""), cough_files, value = TRUE)
+#### Find maximum RUN date
+cough_rundates <- str_extract(cough_input, pattern = "(?<=RUN=).*(?=_MAXDATE)")
+cough_rundates <- as.POSIXct(cough_rundates, format = "%Y-%m-%d-%H-%M-%S")
+cough_max_rundate <- as.character(max(cough_rundates))
+cough_max_rundate <- gsub(" ", "-", cough_max_rundate)
+cough_max_rundate <- gsub(":", "-", cough_max_rundate)
+#### Subset files with maximum RUN datetime from cough_input
+cough_input <- grep(paste("RUN=", cough_max_rundate, sep = ""), cough_input, value = TRUE)
+#### Make target file path
 cough_root <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/processed"
 cough_target <- file.path(cough_root, cough_input)
 
-cat(paste("Loading production file from ",
-          production_dates[which.max(production_dates)],
+cat(paste("Loading production file run version ", production_max_rundate,
+          " with records up to ",
+          production_max_date,
           "...\n",
           sep = ""))
 load(production_target)
 
-cat(paste("Loading cough file from ",
-          cough_dates[which.max(cough_dates)],
+cat(paste("Loading cough file run version ", cough_max_rundate,
+          " with records up to ",
+          cough_max_date,
           "...\n",
           sep = ""))
 load(cough_target)
@@ -159,26 +184,30 @@ cat("\n")
 
 ###############################################################################
 
-production_dates <- production_dates[which.max(production_dates)]
-cough_dates <- cough_dates[which.max(cough_dates)]
-
 master_root <- "/group/deckerlab/cjgwx7/sensor-data/data/master"
-master_dates <- c(production_dates, cough_dates)
+master_dates <- c(production_max_date, cough_max_date)
+master_min_date <- min(master_dates)
+run_date <- paste(format(Sys.Date(), "%Y-%m-%d"),
+                  "-",
+                  format(Sys.time(), "%H-%M-%S"),
+                  sep = "")
 
 master_filename_rdata <- paste("master-",
-                               master_dates[which.min(master_dates)],
+                               "RUN=", run_date, "_",
+                               "MAXDATE=", master_min_date,
                                ".RData",
                                sep = "")
 master_filename_rdata <- file.path(master_root, master_filename_rdata)
 
 master_filename_csv <- paste("master-",
-                             master_dates[which.min(master_dates)],
-                             ".csv",
-                             sep = "")
+                               "RUN=", run_date, "_",
+                               "MAXDATE=", master_min_date,
+                               ".csv",
+                               sep = "")
 master_filename_csv <- file.path(master_root, master_filename_csv)
 
-cat(paste("Exporting master file version ",
-          master_dates[which.min(master_dates)],
+cat(paste("Exporting master file with dates up to ",
+          master_min_date,
           "...\n",
           sep = ""))
 

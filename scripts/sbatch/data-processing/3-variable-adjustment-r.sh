@@ -12,5 +12,5 @@
 
 source activate r-sensors
 Rscript /group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/3-variable-adjustment.R \
---data /group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20.RData \
---data-export /group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20-adjusted
+--data /group/deckerlab/cjgwx7/sensor-data/data/master/master-RUN=2023-01-12-21-07-38_MAXDATE=2022-07-20.RData \
+--data-export /group/deckerlab/cjgwx7/sensor-data/data/master/master-adjusted-RUN=2023-01-12-21-07-38_MAXDATE=2022-07-20

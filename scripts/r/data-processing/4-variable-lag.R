@@ -102,20 +102,25 @@ cat("\n")
 
 ###############################################################################
 
-cat("Creating dummy variables...\n")
-master_v2 <- master %>%
-    mutate(Color_ReHS_Green = ifelse(Color_ReHS == "Green", 1, 0),
-           Color_ReHS_Yellow = ifelse(Color_ReHS == "Yellow", 1, 0),
-           Color_ReHS_Red = ifelse(Color_ReHS == "Red", 1, 0)) %>%
-    select(-Color_ReHS)
+cat("De-trending water disappearance variables...\n")
+master <- master %>%
+    group_by(Site_Room_Turn) %>%
+    mutate(WaterDispHdRMS_Lag1 = lag(WaterDispHdRMS, 1),
+           WaterDispHdVC_Lag1 = lag(WaterDispHdVC, 1)) %>%
+    ungroup(.) %>%
+    mutate(WaterDispHdRMSDifference = WaterDispHdRMS - WaterDispHdRMS_Lag1,
+           WaterDispHdVCDifference = WaterDispHdVC - WaterDispHdVC_Lag1) %>%
+    dplyr::select(Order:WaterDispHdRMS, WaterDispHdRMSDifference,
+                  WaterDispVC:WaterDispHdVC, WaterDispHdVCDifference,
+                  SetPointRMS:Color_ReHS_Red)
 
 cat("Creating a standardized copy...\n")
-master_v2_std <- master_v2 %>%
-    mutate(across(c(Days:StdResidualTotalMortality, Penicillin:TotalTreatmentsProportion, WaterDispRMS:ReHS),
+master_std <- master %>%
+    mutate(across(c(Days:TotalMortalityProportion, Penicillin:TotalTreatmentsProportion, WaterDispRMS:ReHS),
                   ~ (.x - mean(.x, na.rm = TRUE)) / sd(.x, na.rm = TRUE)))
 
 cat("Lagging variables...\n")
-master_v3 <- master_v2 %>%
+master <- master %>%
     # lags are calculated within unqiue turns
     dplyr::group_by(Site_Room_Turn) %>%
     # lag days 0 through 21
@@ -144,7 +149,7 @@ master_v3 <- master_v2 %>%
     dplyr::select(-c(Days:Color_ReHS_Red)) %>%
     dplyr::ungroup(.)
 
-master_v3_std <- master_v2_std %>%
+master_std <- master_std %>%
     # lags are calculated within unqiue turns
     dplyr::group_by(Site_Room_Turn) %>%
     # lag days 0 through 21
@@ -172,9 +177,6 @@ master_v3_std <- master_v2_std %>%
     dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 21), .names = "{.col}_Lag21")) %>%
     dplyr::select(-c(Days:Color_ReHS_Red)) %>%
     dplyr::ungroup(.)
-
-master <- master_v3
-master_std <- master_v3_std
 
 ###############################################################################
 
@@ -199,6 +201,7 @@ cat("\n")
 ###############################################################################
 
 root_export_path <- args$data_export
+
 rdata_export <- paste(root_export_path, ".RData", sep = "")
 csv_export <- paste(root_export_path, ".csv", sep = "")
 

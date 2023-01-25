@@ -69,7 +69,7 @@ single_variable_negbin <- function(df, y, x_pos, covariate, int, random_effect) 
     re <- unname(unlist(df[, random_effect]))
 
     ### Extract offset
-    off <- unname(unlist(df[, "Inventory"]))
+    off <- unname(unlist(df[, "Inventory_Lag0"]))
 
     fit_list <- list()
 
@@ -123,7 +123,7 @@ single_variable_negbin <- function(df, y, x_pos, covariate, int, random_effect) 
     re <- unname(unlist(df[, random_effect]))
 
     ### Extract offset
-    off <- unname(unlist(df[, "Inventory"]))
+    off <- unname(unlist(df[, "Inventory_Lag0"]))
 
     fit_list <- list()
 
@@ -175,7 +175,7 @@ single_variable_negbin <- function(df, y, x_pos, covariate, int, random_effect) 
     cov <- unname(unlist(df[, covariate]))
 
     ### Extract offset
-    off <- unname(unlist(df[, "Inventory"]))
+    off <- unname(unlist(df[, "Inventory_Lag0"]))
 
     fit_list <- list()
 
@@ -225,7 +225,7 @@ single_variable_negbin <- function(df, y, x_pos, covariate, int, random_effect) 
     re <- unname(unlist(df[, random_effect]))
 
     ### Extract offset
-    off <- unname(unlist(df[, "Inventory"]))
+    off <- unname(unlist(df[, "Inventory_Lag0"]))
 
     fit_list <- list()
 
@@ -276,7 +276,7 @@ single_variable_negbin <- function(df, y, x_pos, covariate, int, random_effect) 
     cov <- unname(unlist(df[, covariate]))
 
     ### Extract offset
-    off <- unname(unlist(df[, "Inventory"]))
+    off <- unname(unlist(df[, "Inventory_Lag0"]))
 
     fit_list <- list()
 
@@ -323,7 +323,7 @@ single_variable_negbin <- function(df, y, x_pos, covariate, int, random_effect) 
     names_X <- names(X_df) # nolint
 
     ### Extract offset
-    off <- unname(unlist(df[, "Inventory"]))
+    off <- unname(unlist(df[, "Inventory_Lag0"]))
 
     fit_list <- list()
 

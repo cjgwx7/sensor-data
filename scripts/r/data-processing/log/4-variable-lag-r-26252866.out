@@ -1,4 +1,4 @@
-[1] "The current script was initialized on Wednesday, September 28, 2022 at 02:56 PM"
+[1] "The current script was initialized on Friday, January 13, 2023 at 01:02 PM"
 
 ########################################
         BEGIN: ENVIRONMENT SETUP
@@ -38,7 +38,7 @@ Loading package: tidyr
 ########################################
 
 Importing data file from path:
-/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20-adjusted.RData
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-adjusted-RUN=2023-01-12-21-07-38_MAXDATE=2022-07-20.RData
 
 Preview of data file...
 Rows: 5,676
@@ -56,6 +56,7 @@ $ Site_Turn                        <fct> 4NL2_1, 4NL2_1, 4NL2_1, 4NL2_1, 4NL2_�
 $ Site_Room_Turn                   <fct> 4NL2_1_1, 4NL2_1_1, 4NL2_1_1, 4NL2_1_…
 $ CalendarDate                     <date> 2021-01-08, 2021-01-09, 2021-01-10, …
 $ NumericDate                      <dbl> 44204, 44205, 44206, 44207, 44208, 44…
+$ GrowthPeriod                     <fct> Early, Early, Early, Early, Early, Ea…
 $ Days                             <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12…
 $ Inventory                        <dbl> 908, 908, 908, 2860, 2860, 2860, 2859…
 $ InventoryChange                  <dbl> 908, 0, 0, 1952, 0, 0, -1, -1, 0, 0, …
@@ -67,10 +68,10 @@ $ Dead                             <dbl> 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1�
 $ DeadProportion                   <dbl> 0.0000000000, 0.0000000000, 0.0000000…
 $ TotalMortality                   <dbl> 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1…
 $ TotalMortalityProportion         <dbl> 0.0000000000, 0.0000000000, 0.0000000…
-$ ResidualTotalMortality           <dbl> -0.11879064, -0.12897716, -0.13969645…
-$ StdResidualTotalMortality        <dbl> 0.2853331, 0.2692437, 0.2523128, -0.3…
-$ HighMortalityDay                 <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-$ ExtremeHighMortalityDay          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ EHMD_CubicDays                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ EHMD_GPST                        <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ EHMD_GP                          <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ EHMD_WGP                         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 $ Penicillin                       <dbl> NA, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 0, …
 $ PenicillinProportion             <dbl> NA, 0.0022026432, 0.0011013216, 0.000…
 $ Dexamethasone                    <dbl> NA, 2, 1, 1, 4, 6, 7, 4, 6, 8, 4, 48,…
@@ -94,10 +95,8 @@ $ TotalTreatmentsProportion        <dbl> NA, 0.024229075, 0.024229075, 0.00699�
 $ WaterMedications                 <dbl> NA, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, …
 $ WaterDispRMS                     <dbl> NA, NA, 116, NA, NA, 495, 502, 540, 5…
 $ WaterDispHdRMS                   <dbl> NA, NA, 0.1277533, NA, NA, 0.1730769,…
-$ ResidualWaterDispHdRMS           <dbl> NA, NA, -0.507537104, NA, NA, -0.0680…
 $ WaterDispVC                      <dbl> NA, 107, 125, NA, 478, 517, 527, 578,…
 $ WaterDispHdVC                    <dbl> NA, 0.1178414, 0.1376652, NA, 0.16713…
-$ ResidualWaterDispHdVC            <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
 $ SetPointRMS                      <dbl> NA, 79.9, 83.5, 83.5, 83.5, 83.5, 83.…
 $ LowTempRMS                       <dbl> NA, 68.7, 80.6, 80.3, 80.6, 80.8, 80.…
 $ MidPointTempRMS                  <dbl> NA, 78.05, 82.40, 82.15, 82.25, 82.20…
@@ -116,7 +115,8 @@ $ AvgTempSetPointDeviationVC       <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, N�
 $ HiTempSetPointDeviationVC        <dbl> NA, 0.7, 0.5, 0.4, 0.1, 0.1, 0.0, -0.…
 $ Temp_ReHS                        <dbl> 85.4, 86.3, 87.2, 86.0, 85.4, 85.4, 8…
 $ ReHS                             <dbl> 98.66667, 92.33333, 82.00000, 92.3333…
-$ Color_ReHS                       <fct> Green, Green, Green, Green, Green, Gr…
+$ Color_ReHS_Yellow                <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ Color_ReHS_Red                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 
 ########################################
       END: FILE CONFIGURATION
@@ -126,7 +126,7 @@ $ Color_ReHS                       <fct> Green, Green, Green, Green, Green, Gr�
       BEGIN: VARIABLE ADJUSTMENT
 ########################################
 
-Creating dummy variables...
+De-trending water disappearance variables...
 Creating a standardized copy...
 Lagging variables...
 
@@ -139,18 +139,18 @@ Lagging variables...
 ########################################
 
 Exporting .RData object to path:
-/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20-lagged.RData
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-lagged-RUN=2023-01-12-21-07-38_MAXDATE=2022-07-20.RData
 
 Exporting .csv file to path:
-/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20-lagged.csv
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-lagged-RUN=2023-01-12-21-07-38_MAXDATE=2022-07-20.csv
 Exporting .RData object to path:
-/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20-lagged-standardized.RData
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-lagged-RUN=2023-01-12-21-07-38_MAXDATE=2022-07-20-standardized.RData
 
 Exporting .csv file to path:
-/group/deckerlab/cjgwx7/sensor-data/data/master/master-2022-07-20-lagged-standardized.csv
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-lagged-RUN=2023-01-12-21-07-38_MAXDATE=2022-07-20-standardized.csv
 
 ########################################
       END: FILE CONFIGURATION
 ########################################
 
-[1] "The current script was completed on Wednesday, September 28, 2022 at 02:56 PM"
+[1] "The current script was completed on Friday, January 13, 2023 at 01:03 PM"

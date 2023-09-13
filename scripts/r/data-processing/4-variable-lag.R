@@ -112,7 +112,7 @@ master <- master %>%
            WaterDispHdVCDifference = WaterDispHdVC - WaterDispHdVC_Lag1) %>%
     dplyr::select(Order:WaterDispHdRMS, WaterDispHdRMSDifference,
                   WaterDispVC:WaterDispHdVC, WaterDispHdVCDifference,
-                  SetPointRMS:Color_ReHS_Red)
+                  SetPointRMS:Color_ReHS_Yellow_Red)
 
 cat("Creating a standardized copy...\n")
 master_std <- master %>%
@@ -124,58 +124,58 @@ master <- master %>%
     # lags are calculated within unqiue turns
     dplyr::group_by(Site_Room_Turn) %>%
     # lag days 0 through 21
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), .names = "{.col}_Lag0")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 1), .names = "{.col}_Lag1")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 2), .names = "{.col}_Lag2")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 3), .names = "{.col}_Lag3")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 4), .names = "{.col}_Lag4")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 5), .names = "{.col}_Lag5")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 6), .names = "{.col}_Lag6")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 7), .names = "{.col}_Lag7")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 8), .names = "{.col}_Lag8")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 9), .names = "{.col}_Lag9")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 10), .names = "{.col}_Lag10")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 11), .names = "{.col}_Lag11")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 12), .names = "{.col}_Lag12")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 13), .names = "{.col}_Lag13")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 14), .names = "{.col}_Lag14")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 15), .names = "{.col}_Lag15")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 16), .names = "{.col}_Lag16")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 17), .names = "{.col}_Lag17")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 18), .names = "{.col}_Lag18")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 19), .names = "{.col}_Lag19")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 20), .names = "{.col}_Lag20")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 21), .names = "{.col}_Lag21")) %>%
-    dplyr::select(-c(Days:Color_ReHS_Red)) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), .names = "{.col}_Lag0")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 1), .names = "{.col}_Lag1")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 2), .names = "{.col}_Lag2")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 3), .names = "{.col}_Lag3")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 4), .names = "{.col}_Lag4")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 5), .names = "{.col}_Lag5")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 6), .names = "{.col}_Lag6")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 7), .names = "{.col}_Lag7")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 8), .names = "{.col}_Lag8")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 9), .names = "{.col}_Lag9")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 10), .names = "{.col}_Lag10")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 11), .names = "{.col}_Lag11")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 12), .names = "{.col}_Lag12")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 13), .names = "{.col}_Lag13")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 14), .names = "{.col}_Lag14")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 15), .names = "{.col}_Lag15")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 16), .names = "{.col}_Lag16")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 17), .names = "{.col}_Lag17")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 18), .names = "{.col}_Lag18")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 19), .names = "{.col}_Lag19")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 20), .names = "{.col}_Lag20")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 21), .names = "{.col}_Lag21")) %>%
+    dplyr::select(-c(Days:Color_ReHS_Yellow_Red)) %>%
     dplyr::ungroup(.)
 
 master_std <- master_std %>%
     # lags are calculated within unqiue turns
     dplyr::group_by(Site_Room_Turn) %>%
     # lag days 0 through 21
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), .names = "{.col}_Lag0")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 1), .names = "{.col}_Lag1")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 2), .names = "{.col}_Lag2")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 3), .names = "{.col}_Lag3")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 4), .names = "{.col}_Lag4")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 5), .names = "{.col}_Lag5")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 6), .names = "{.col}_Lag6")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 7), .names = "{.col}_Lag7")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 8), .names = "{.col}_Lag8")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 9), .names = "{.col}_Lag9")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 10), .names = "{.col}_Lag10")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 11), .names = "{.col}_Lag11")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 12), .names = "{.col}_Lag12")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 13), .names = "{.col}_Lag13")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 14), .names = "{.col}_Lag14")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 15), .names = "{.col}_Lag15")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 16), .names = "{.col}_Lag16")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 17), .names = "{.col}_Lag17")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 18), .names = "{.col}_Lag18")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 19), .names = "{.col}_Lag19")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 20), .names = "{.col}_Lag20")) %>%
-    dplyr::mutate(across(c(Days:Color_ReHS_Red), ~ dplyr::lag(.x, 21), .names = "{.col}_Lag21")) %>%
-    dplyr::select(-c(Days:Color_ReHS_Red)) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), .names = "{.col}_Lag0")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 1), .names = "{.col}_Lag1")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 2), .names = "{.col}_Lag2")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 3), .names = "{.col}_Lag3")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 4), .names = "{.col}_Lag4")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 5), .names = "{.col}_Lag5")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 6), .names = "{.col}_Lag6")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 7), .names = "{.col}_Lag7")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 8), .names = "{.col}_Lag8")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 9), .names = "{.col}_Lag9")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 10), .names = "{.col}_Lag10")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 11), .names = "{.col}_Lag11")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 12), .names = "{.col}_Lag12")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 13), .names = "{.col}_Lag13")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 14), .names = "{.col}_Lag14")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 15), .names = "{.col}_Lag15")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 16), .names = "{.col}_Lag16")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 17), .names = "{.col}_Lag17")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 18), .names = "{.col}_Lag18")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 19), .names = "{.col}_Lag19")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 20), .names = "{.col}_Lag20")) %>%
+    dplyr::mutate(across(c(Days:Color_ReHS_Yellow_Red), ~ dplyr::lag(.x, 21), .names = "{.col}_Lag21")) %>%
+    dplyr::select(-c(Days:Color_ReHS_Yellow_Red)) %>%
     dplyr::ungroup(.)
 
 ###############################################################################

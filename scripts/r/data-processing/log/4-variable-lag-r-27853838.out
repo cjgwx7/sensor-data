@@ -1,4 +1,4 @@
-[1] "The current script was initialized on Friday, January 13, 2023 at 01:02 PM"
+[1] "The current script was initialized on Wednesday, September 13, 2023 at 02:17 PM"
 
 ########################################
         BEGIN: ENVIRONMENT SETUP
@@ -42,7 +42,7 @@ Importing data file from path:
 
 Preview of data file...
 Rows: 5,676
-Columns: 74
+Columns: 77
 $ Order                            <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12…
 $ GlobalID                         <chr> "4NL2_1_44204", "4NL2_1_44205", "4NL2…
 $ AltGlobalID                      <chr> "4NL2_1_44204", "4NL2_1_44205", "4NL2…
@@ -117,6 +117,9 @@ $ Temp_ReHS                        <dbl> 85.4, 86.3, 87.2, 86.0, 85.4, 85.4, 8�
 $ ReHS                             <dbl> 98.66667, 92.33333, 82.00000, 92.3333…
 $ Color_ReHS_Yellow                <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 $ Color_ReHS_Red                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ Color_ReHS_Green_Red             <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ Color_ReHS_Green_Yellow          <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ Color_ReHS_Yellow_Red            <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 
 ########################################
       END: FILE CONFIGURATION
@@ -153,4 +156,4 @@ Exporting .csv file to path:
       END: FILE CONFIGURATION
 ########################################
 
-[1] "The current script was completed on Friday, January 13, 2023 at 01:03 PM"
+[1] "The current script was completed on Wednesday, September 13, 2023 at 02:17 PM"

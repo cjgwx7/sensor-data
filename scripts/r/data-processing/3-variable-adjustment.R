@@ -323,9 +323,15 @@ master <- master %>%
            EHMD_WGP = coalesce(EHMD_E, EHMD_EM, EHMD_LM, EHMD_L)) %>%
     dplyr::select(Order:TotalMortalityProportion, EHMD_CubicDays:EHMD_GP, EHMD_WGP, Penicillin:Color_ReHS) %>%
     mutate(Color_ReHS_Yellow = ifelse(Color_ReHS == "Yellow", 1, 0),
-           Color_ReHS_Red = ifelse(Color_ReHS == "Red", 1, 0)) %>%
-    dplyr::select(Order:ReHS, Color_ReHS_Yellow:Color_ReHS_Red) %>%
-    mutate(across(Days:Color_ReHS_Red, as.double))
+           Color_ReHS_Red = ifelse(Color_ReHS == "Red", 1, 0),
+           Color_ReHS_Green_Red = ifelse(Color_ReHS == "Green", 1,
+                                         ifelse(Color_ReHS == "Red", -1, 0)),
+           Color_ReHS_Green_Yellow = ifelse(Color_ReHS == "Green", 1,
+                                            ifelse(Color_ReHS == "Yellow", -1, 0)),
+           Color_ReHS_Yellow_Red = ifelse(Color_ReHS == "Yellow", 1,
+                                          ifelse(Color_ReHS == "Red", -1, 0))) %>%
+    dplyr::select(Order:ReHS, Color_ReHS_Yellow:Color_ReHS_Yellow_Red) %>%
+    mutate(across(Days:Color_ReHS_Yellow_Red, as.double))
 
 ###############################################################################
 

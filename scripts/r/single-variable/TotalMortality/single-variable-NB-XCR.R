@@ -116,7 +116,7 @@ df <- df %>%
            Days_Lag0 = Covariate,
            Inventory_Lag0 = Offset) %>%
     select(Order:GrowthPeriod, Days_Lag0, Inventory_Lag0, TotalMortality_Lag0,
-           Penicillin_Lag0:Color_ReHS_Red_Lag21)
+           Penicillin_Lag0:Color_ReHS_Yellow_Red_Lag21)
 
 cat("Fitting regression models...\n")
 fit_df <- single_variable_negbin(df = df, y = "TotalMortality_Lag0", x_pos = c(18:ncol(df)), covariate = "Days_Lag0", int = FALSE, random_effect = "Site_Turn")

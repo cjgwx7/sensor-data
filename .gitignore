@@ -1,2 +1,13 @@
 data
 results
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/single-variable/EHMD_CubicDays/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/single-variable/EHMD_GP/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/single-variable/EHMD_GPST/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/single-variable/EHMD_WGP/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/single-variable/ExtremeHighMortalityDay/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/single-variable/TotalMortality/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/statistical-modeling/Residual_ReHS/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/statistical-modeling/ResidualWaterDispHdRMS/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/statistical-modeling/ResidualWaterDispHdVC/log
+/group/deckerlab/cjgwx7/sensor-data/scripts/r/statistical-modeling/TotalMortality/log

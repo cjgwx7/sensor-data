@@ -1,0 +1,99 @@
+[1] "The current script was initialized on Wednesday, September 13, 2023 at 02:29 PM"
+
+########################################
+        BEGIN: ENVIRONMENT SETUP
+########################################
+
+Loading package: argparse
+Warning message:
+package ‘argparse’ was built under R version 4.1.3 
+Loading package: data.table
+Loading package: dplyr
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:data.table’:
+
+    between, first, last
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading package: readr
+Loading package: stringr
+Loading package: tibble
+Loading package: tidyr
+
+########################################
+         END: ENVIRONMENT SETUP
+########################################
+
+########################################
+     BEGIN: FILE CONFIGURATION
+########################################
+
+Importing data file from path:
+/group/deckerlab/cjgwx7/sensor-data/data/master/master-lagged-RUN=2023-01-12-21-07-38_MAXDATE=2022-07-20.csv
+
+Preview of data file...
+Loading single variable function...
+
+########################################
+      END: FILE CONFIGURATION
+########################################
+
+########################################
+      BEGIN: VARIABLE ADJUSTMENT
+########################################
+
+Fitting regression models...
+Loading required package: lmerTest
+Loading required package: lme4
+Loading required package: Matrix
+
+Attaching package: ‘Matrix’
+
+The following objects are masked from ‘package:tidyr’:
+
+    expand, pack, unpack
+
+
+Attaching package: ‘lmerTest’
+
+The following object is masked from ‘package:lme4’:
+
+    lmer
+
+The following object is masked from ‘package:stats’:
+
+    step
+
+[1] "Penicillin_Lag0"
+[1] "PenicillinProportion_Lag0"
+[1] "Dexamethasone_Lag0"
+[1] "DexamethasoneProportion_Lag0"
+[1] "Ceftiofur_Lag0"
+[1] "CeftiofurProportion_Lag0"
+[1] "Enroflaxin_Lag0"
+[1] "EnroflaxinProportion_Lag0"
+[1] "Tetracycline_Lag0"
+[1] "TetracyclineProportion_Lag0"
+[1] "Lincomycin_Lag0"
+[1] "LincomycinProportion_Lag0"
+[1] "OtherTreatments_Lag0"
+[1] "OtherTreatmentsProportion_Lag0"
+[1] "PrimaryRespiratory_Lag0"
+[1] "PrimaryRespiratoryProportion_Lag0"
+[1] "SecondaryRespiratory_Lag0"
+[1] "SecondaryRespiratoryProportion_Lag0"
+[1] "TotalTreatments_Lag0"
+[1] "TotalTreatmentsProportion_Lag0"
+[1] "WaterMedications_Lag0"
+[1] "WaterDispHdRMS_Lag0"
+[1] "WaterDispHdRMSDifference_Lag0"
+[1] "WaterDispHdVC_Lag0"

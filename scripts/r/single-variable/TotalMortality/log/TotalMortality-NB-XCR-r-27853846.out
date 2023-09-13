@@ -371,3 +371,7 @@ The following object is masked from ‘package:stats’:
 [1] "EnroflaxinProportion_Lag6"
 [1] "Tetracycline_Lag6"
 [1] "TetracyclineProportion_Lag6"
+[1] "Lincomycin_Lag6"
+[1] "LincomycinProportion_Lag6"
+[1] "OtherTreatments_Lag6"
+[1] "OtherTreatmentsProportion_Lag6"

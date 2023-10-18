@@ -98,20 +98,41 @@ single_variable_negbin_ar1 <- function(df, y, x_pos, covariate, int, random_effe
                            SE_X = tryCatch({fit_coef[2, 2]}, error = function(e) {return(NA)}), # nolint
                            Z_X = tryCatch({fit_coef[2, 3]}, error = function(e) {return(NA)}), # nolint
                            P_X = tryCatch({fit_coef[2, 4]}, error = function(e) {return(NA)}), # nolint
-                           Beta_C = tryCatch({fit_coef[3, 1]}, error = function(e) {return(NA)}), # nolint
-                           SE_C = tryCatch({fit_coef[3, 2]}, error = function(e) {return(NA)}), # nolint
-                           Z_C = tryCatch({fit_coef[3, 3]}, error = function(e) {return(NA)}), # nolint
-                           P_C = tryCatch({fit_coef[3, 4]}, error = function(e) {return(NA)}), # nolint
-                           Beta_I = tryCatch({fit_coef[4, 1]}, error = function(e) {return(NA)}), # nolint
-                           SE_I = tryCatch({fit_coef[4, 2]}, error = function(e) {return(NA)}), # nolint
-                           Z_I = tryCatch({fit_coef[4, 3]}, error = function(e) {return(NA)}), # nolint
-                           P_I = tryCatch({fit_coef[4, 4]}, error = function(e) {return(NA)}), # nolint
+                           Intercept = tryCatch({fit_coef[1, 1]}, error = function(e) {return(NA)}), # nolint
+                           SE_Intercept = tryCatch({fit_coef[1, 2]}, error = function(e) {return(NA)}), # nolint
+                           Z_Intercept = tryCatch({fit_coef[1, 3]}, error = function(e) {return(NA)}), # nolint
+                           P_Intercept = tryCatch({fit_coef[1, 4]}, error = function(e) {return(NA)}), # nolint
+                           Beta_C2 = tryCatch({fit_coef[3, 1]}, error = function(e) {return(NA)}), # nolint
+                           SE_C2 = tryCatch({fit_coef[3, 2]}, error = function(e) {return(NA)}), # nolint
+                           Z_C2 = tryCatch({fit_coef[3, 3]}, error = function(e) {return(NA)}), # nolint
+                           P_C2 = tryCatch({fit_coef[3, 4]}, error = function(e) {return(NA)}), # nolint
+                           Beta_C3 = tryCatch({fit_coef[4, 1]}, error = function(e) {return(NA)}), # nolint
+                           SE_C3 = tryCatch({fit_coef[4, 2]}, error = function(e) {return(NA)}), # nolint
+                           Z_C3 = tryCatch({fit_coef[4, 3]}, error = function(e) {return(NA)}), # nolint
+                           P_C3 = tryCatch({fit_coef[4, 4]}, error = function(e) {return(NA)}), # nolint
+                           Beta_C4 = tryCatch({fit_coef[5, 1]}, error = function(e) {return(NA)}), # nolint
+                           SE_C4 = tryCatch({fit_coef[5, 2]}, error = function(e) {return(NA)}), # nolint
+                           Z_C4 = tryCatch({fit_coef[5, 3]}, error = function(e) {return(NA)}), # nolint
+                           P_C4 = tryCatch({fit_coef[5, 4]}, error = function(e) {return(NA)}), # nolint
+                           Beta_I1 = tryCatch({fit_coef[6, 1]}, error = function(e) {return(NA)}), # nolint
+                           SE_I1 = tryCatch({fit_coef[6, 2]}, error = function(e) {return(NA)}), # nolint
+                           Z_I1 = tryCatch({fit_coef[6, 3]}, error = function(e) {return(NA)}), # nolint
+                           P_I1 = tryCatch({fit_coef[6, 4]}, error = function(e) {return(NA)}), # nolint
+                           Beta_I2 = tryCatch({fit_coef[7, 1]}, error = function(e) {return(NA)}), # nolint
+                           SE_I2 = tryCatch({fit_coef[7, 2]}, error = function(e) {return(NA)}), # nolint
+                           Z_I2 = tryCatch({fit_coef[7, 3]}, error = function(e) {return(NA)}), # nolint
+                           P_I2 = tryCatch({fit_coef[7, 4]}, error = function(e) {return(NA)}), # nolint
+                           Beta_I3 = tryCatch({fit_coef[8, 1]}, error = function(e) {return(NA)}), # nolint
+                           SE_I3 = tryCatch({fit_coef[8, 2]}, error = function(e) {return(NA)}), # nolint
+                           Z_I3 = tryCatch({fit_coef[8, 3]}, error = function(e) {return(NA)}), # nolint
+                           P_I3 = tryCatch({fit_coef[8, 4]}, error = function(e) {return(NA)}), # nolint
                            RandomEffect = random_effect,
                            RandomEffectVariance = variance,
                            AIC = AIC(fit),
                            BIC = BIC(fit))
 
       fit_list[[i]] <- fit_df
+      print(names_X[i])
 
     }
 

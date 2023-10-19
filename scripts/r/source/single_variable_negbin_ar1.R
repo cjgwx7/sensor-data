@@ -78,6 +78,8 @@ single_variable_negbin_ar1 <- function(df, y, x_pos, covariate, int, random_effe
     ar1_re <- unname(unlist(df[, "Site_Room_Turn"]))
 
     fit_list <- list()
+    model_list <- list()
+    vcov_list <- list()
 
     for (i in seq_len(ncol(X_df))) {
 
@@ -132,6 +134,8 @@ single_variable_negbin_ar1 <- function(df, y, x_pos, covariate, int, random_effe
                            BIC = BIC(fit))
 
       fit_list[[i]] <- fit_df
+      model_list[[i]] <- fit
+      vcov_list[[i]] <- vcov(fit)$cond
       print(names_X[i])
 
     }
@@ -161,6 +165,8 @@ single_variable_negbin_ar1 <- function(df, y, x_pos, covariate, int, random_effe
     ar1_re <- unname(unlist(df[, "Site_Room_Turn"]))
     
     fit_list <- list()
+    model_list <- list()
+    vcov_list <- list()
 
     for (i in seq_len(ncol(X_df))) {
 
@@ -195,8 +201,10 @@ single_variable_negbin_ar1 <- function(df, y, x_pos, covariate, int, random_effe
                            BIC = BIC(fit))
 
       fit_list[[i]] <- fit_df
+      model_list[[i]] <- fit
+      vcov_list[[i]] <- vcov(fit)$cond
       print(names_X[i])
-
+      
     }
 
   } else if (length(covariate) == 1 & int == TRUE & length(random_effect) != 1) {
@@ -429,6 +437,7 @@ single_variable_negbin_ar1 <- function(df, y, x_pos, covariate, int, random_effe
   }
 
   results_df <- dplyr::bind_rows(fit_list)
-  return(results_df)
+  results_list <- list("coefficients" = results_df, "models" = model_list, "vcov" = vcov_list)
+  return(results_list)
 
 }

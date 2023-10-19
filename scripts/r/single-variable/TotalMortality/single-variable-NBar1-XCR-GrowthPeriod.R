@@ -119,7 +119,7 @@ df <- df %>%
            Penicillin_Lag0:Color_ReHS_Red_Lag21)
 
 cat("Fitting regression models...\n")
-fit_df <- single_variable_negbin_ar1(df = df, y = "TotalMortality_Lag0", x_pos = c(18:ncol(df)), covariate = "GrowthPeriod", int = FALSE, random_effect = "Site_Turn")
+fit_df <- single_variable_negbin_ar1(df = df, y = "TotalMortality_Lag0", x_pos = c(18:ncol(df)), covariate = "GrowthPeriod", int = FALSE, random_effect = "Site_Room_Turn")
 
 ###############################################################################
 
@@ -145,17 +145,17 @@ cat("\n")
 
 root_export_path <- args$data_export
 rdata_export <- paste(root_export_path, ".RData", sep = "")
-csv_export <- paste(root_export_path, ".csv", sep = "")
+#csv_export <- paste(root_export_path, ".csv", sep = "")
 
 cat(paste("Exporting .RData object to path:\n", rdata_export, sep = ""))
 save(fit_df, file = rdata_export)
 cat("\n")
 cat("\n")
 
-cat(paste("Exporting .csv file to path:\n", csv_export, sep = ""))
-write_csv(fit_df,
-          file = csv_export)
-cat("\n")
+#cat(paste("Exporting .csv file to path:\n", csv_export, sep = ""))
+#write_csv(fit_df,
+#          file = csv_export)
+#cat("\n")
 
 ###############################################################################
 

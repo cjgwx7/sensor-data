@@ -4,7 +4,7 @@
 #SBATCH -n 1
 #SBATCH -c 1
 #SBATCH -A animalsci
-#SBATCH --mem 10G
+#SBATCH --mem 50G
 #SBATCH -t 00-24:00
 #SBATCH -o /group/deckerlab/cjgwx7/sensor-data/scripts/r/single-variable/TotalMortality/log/TotalMortality-NBar1-XCR-GrowthPeriod-r-%j.out
 #SBATCH --mail-type END

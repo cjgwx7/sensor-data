@@ -11,4 +11,5 @@
 #SBATCH --mail-user cgrohmann@mail.missouri.edu
 
 source activate r-sensors
-Rscript "/group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/1b-preprocessing-cough.R" "/group/deckerlab/cjgwx7/sensor-data/data/cough/09-29-2022.zip"
+Rscript "/group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/1b-preprocessing-cough.R" \
+"/group/deckerlab/cjgwx7/sensor-data/data/cough/09-07-2023.zip"

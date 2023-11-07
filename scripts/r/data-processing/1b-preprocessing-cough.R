@@ -63,11 +63,19 @@ cat("\n")
 ###############################################################################
 
 target_file <- commandArgs(trailingOnly = TRUE)[1]
-file_name <- str_sub(target_file, -14, -1)
-date <- str_sub(file_name, 1, 10)
-root_dir <- str_remove(target_file, paste("/", file_name, sep = ""))
-dir_check <- file.path(root_dir, date)
+print(paste("Target file:", target_file, sep = " "))
 
+file_name <- str_sub(target_file, -14, -1)
+print(paste("File name:", file_name, sep = " "))
+
+date <- str_sub(file_name, 1, 10)
+print(paste("File date:", date, sep = " "))
+
+root_dir <- str_remove(target_file, paste("/", file_name, sep = ""))
+print(paste("Root directory:", root_dir, sep = " "))
+
+dir_check <- file.path(root_dir, date)
+print(paste("Directory check:", dir_check, sep = " "))
 
 if (dir.exists(dir_check) == FALSE) {
 
@@ -250,7 +258,7 @@ max_date <- unname(unlist(cough_v3[, "GlobalID"]))
 max_date <- max(as.integer(substring(max_date, 8, 12)))
 max_date <- as.Date(max_date, origin = "1899-12-30")
 
-export_root_dir <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/processed"
+export_root_dir <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/processed-indiv"
 export_filename <- paste("cough-",
                          "DATE=", received_date, "_",
                          "RUN=", run_date, "_",
@@ -274,6 +282,56 @@ cat("\n")
 
 cat(paste("########################################",
           "           END: FILE EXPORT",
+          "########################################",
+          sep = "\n"),
+    sep = "\n")
+    
+cat("\n")
+
+cat(paste("########################################",
+          "         BEGIN: DEDUPLICATION",
+          "########################################",
+          sep = "\n"),
+    sep = "\n")
+
+cat("\n")
+
+###############################################################################
+
+processed_files_path <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/processed-indiv"
+export_processed_file_root_dir <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/processed-combined"
+
+processed_files <- list.files(path = processed_files_path, full.names = TRUE)
+processed_files <- grep(".RData", processed_files, value = TRUE)
+
+output_processed_file <- processed_files %>%
+  purrr::map_dfr(~ get(load(.))) %>%
+  dplyr::mutate(Room = as.numeric(gsub(".*[_]([^.]+)[_].*", "\\1", GlobalID)),
+                Date = as.numeric(substring(GlobalID, 8, 13))) %>%
+  dplyr::arrange(Site, Room, Date) %>%
+  dplyr::group_by(Site, Room, Date) %>%
+  dplyr::summarise(Temp_ReHS = mean(Temp_ReHS, na.rm = TRUE),
+                   ReHS = mean(ReHS, na.rm = TRUE)) %>%
+  dplyr::ungroup(.) %>%
+  dplyr::mutate(Color_ReHS = ifelse(ReHS <= 99 & ReHS >= 60, "Green",
+                                    ifelse(ReHS < 60 & ReHS >= 40, "Yellow", "Red")),
+                Temp_ReHS = ifelse(is.nan(Temp_ReHS) == TRUE, NA, Temp_ReHS),
+                ReHS = ifelse(is.nan(ReHS) == TRUE, NA, ReHS),
+                GlobalID = paste(Site, Room, Date, sep = "_")) %>%
+  dplyr::select(GlobalID, Temp_ReHS, ReHS, Color_ReHS, Site)
+
+write_csv(output_processed_file,
+          file = file.path(export_processed_file_root_dir, export_filename))
+
+save(output_processed_file,
+     file = file.path(export_processed_file_root_dir, export_filename_rdata))
+
+###############################################################################
+
+cat("\n")
+
+cat(paste("########################################",
+          "           END: DEDUPLICATION",
           "########################################",
           sep = "\n"),
     sep = "\n")

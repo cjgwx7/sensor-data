@@ -137,16 +137,16 @@ df_list <- list()
 for (i in seq_len(6)) {
 
       df_tmp <- read_csv(file.path(dir_list[i], "devices_combined_list.csv"),
-                         col_select = c(3, 5, 7:9),
+                         col_select = c(1:8),
                          col_names = FALSE,
-                         col_types = c("ddccccdcd"),
+                         col_types = c("dccccdcd"),
                          skip = 1,
                          trim_ws = TRUE) %>%
-            rename(Device = X3,
-                   CalendarDate = X5,
-                   Temp_ReHS = X7,
-                   Color_ReHS = X8,
-                   ReHS = X9) %>%
+            rename(Device = X2,
+                   CalendarDate = X4,
+                   Temp_ReHS = X6,
+                   Color_ReHS = X7,
+                   ReHS = X8) %>%
             mutate(Site = site_codes[i])
 
       df_list[[i]] <- df_tmp
@@ -185,7 +185,7 @@ cat("Processing data...\n")
 ### EXTRACT AND BUILD UNIQUE IDENTIFIER
 cough_v2 <- cough %>%
       # Date converison
-      mutate(CalendarDate = as.Date(CalendarDate, format = "%Y-%m-%d"),
+      mutate(CalendarDate = as.Date(CalendarDate, tryFormats = c("%Y-%m-%d", "%m/%d/%Y")),
              NumericDate = as.numeric(CalendarDate - as.Date("1899-12-30"))) %>%
       # Extract room number
       mutate(Room = str_remove(Device, "Maschhoff_"),
@@ -204,7 +204,8 @@ cough_v2 <- cough %>%
              Color_ReHS = ifelse(ReHS < 40, "Red",
                                  ifelse(ReHS > 59, "Green", "Yellow")),
              Color_ReHS = factor(Color_ReHS),
-             Site = substring(GlobalID, 1, 4))
+             Site = substring(GlobalID, 1, 4)) %>%
+             dplyr::select(GlobalID, Temp_ReHS, ReHS, Color_ReHS, Site)
 
 cat("Printing overall summary statistics before QC...\n")
 summary(cough_v2[, 2:4])

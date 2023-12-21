@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -p BioCompute,hpc3,hpc5,hpc6,htc4
+#SBATCH -p hpc3,hpc5,hpc6,htc4
 #SBATCH -n 1
 #SBATCH -c 1
 #SBATCH -A animalsci
@@ -11,4 +11,4 @@
 #SBATCH --mail-user cgrohmann@mail.missouri.edu
 
 source activate r-sensors
-Rscript "/group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/1a-preprocessing-production.R" "/group/deckerlab/cjgwx7/sensor-data/data/production/raw/%ORIGINAL_V3%_2022-07-28.csv"
+Rscript "/group/deckerlab/cjgwx7/sensor-data/scripts/r/data-processing/1a-preprocessing-production.R" "/group/deckerlab/cjgwx7/sensor-data/data/production/raw/%ORIGINAL_V1%_2023-12-10.csv"

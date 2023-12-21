@@ -262,7 +262,7 @@ cat("Configuring Date variables...\n")
 #### DATE QUALITY CONTROL
 date_qc <- tibble(OriginalDate = unname(unlist(production[, "Date"]))) %>%
   mutate(RowNumber = seq_len(nrow(.)),
-         NewDate = as.Date(OriginalDate, format = "%d-%b-%y"),
+         NewDate = as.Date(OriginalDate, tryFormats = c("%m/%d/%Y", "%Y-%m-%d")),
          NewDate = ifelse(year(NewDate) < 2020, NA, NewDate),
          QualityCheck = is.na(OriginalDate) == FALSE & is.na(NewDate) == TRUE)
 
@@ -293,7 +293,7 @@ cat("\n")
 
 ##### DATE CONFIGURATION
 production_v2 <- production %>%
-  mutate(Date = as.Date(Date, format = "%d-%b-%y")) %>%
+  mutate(Date = as.Date(Date, tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>%
   rename(CalendarDate = Date) %>%
   mutate(NumericDate = as.numeric(CalendarDate - as.Date("1899-12-30")))
 
@@ -507,7 +507,7 @@ cat("Removal of nonsensical values and outliers...\n")
 production_v8 <- production_v7 %>%
   ### Inventory quality control
   mutate(Inventory = ifelse(Inventory < 1 | Inventory > 4500, NA, Inventory),
-         across(c(Days:HiTempSetPointDeviationVC),
+         across(c(Inventory:HiTempSetPointDeviationVC),
                 ~ ifelse(is.na(Inventory) == TRUE, NA, .x)),
   ### Mortality quality control
          TotalMortalityProportion = ifelse(TotalMortalityProportion < 0 |
@@ -524,6 +524,7 @@ production_v8 <- production_v7 %>%
          across(c(Penicillin:TotalTreatments), ~ ifelse(is.na(TotalTreatmentsProportion),
                                                           NA,
                                                           .x)),
+         WaterMedications = ifelse(WaterMedications > 1, 1, WaterMedications),
          WaterMedications = ifelse(!WaterMedications %in% c(0, 1),
                                    NA, WaterMedications),
   ### Water disappearance quality control

@@ -82,7 +82,7 @@ production_root <- "/group/deckerlab/cjgwx7/sensor-data/data/production/processe
 production_target <- file.path(production_root, production_input)
 
 #### Extract all possible file names: COUGH
-cough_files <- list.files("/group/deckerlab/cjgwx7/sensor-data/data/cough/processed",
+cough_files <- list.files("/group/deckerlab/cjgwx7/sensor-data/data/cough/processed-combined",
                           pattern = "\\.RData$")
 #### Find the maximum MAXDATE
 cough_dates <- str_extract(cough_files, pattern = "(?<=MAXDATE=).*(?=.RData)")
@@ -99,7 +99,7 @@ cough_max_rundate <- gsub(":", "-", cough_max_rundate)
 #### Subset files with maximum RUN datetime from cough_input
 cough_input <- grep(paste("RUN=", cough_max_rundate, sep = ""), cough_input, value = TRUE)
 #### Make target file path
-cough_root <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/processed"
+cough_root <- "/group/deckerlab/cjgwx7/sensor-data/data/cough/processed-combined"
 cough_target <- file.path(cough_root, cough_input)
 
 cat(paste("Loading production file run version ", production_max_rundate,
@@ -141,8 +141,8 @@ cat("\n")
 production <- production_v9
 rm(production_v9)
 
-cough <- cough_v3
-rm(cough_v3)
+cough <- output_processed_file
+rm(output_processed_file)
 
 production_v2 <- production %>%
       mutate(AltOldRoom = str_extract(OldRoom, "\\d+"),

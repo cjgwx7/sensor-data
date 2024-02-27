@@ -330,8 +330,10 @@ master <- master %>%
                                             ifelse(Color_ReHS == "Yellow", -1, 0)),
            Color_ReHS_Yellow_Red = ifelse(Color_ReHS == "Yellow", 1,
                                           ifelse(Color_ReHS == "Red", -1, 0))) %>%
-    dplyr::select(Order:ReHS, Color_ReHS_Yellow:Color_ReHS_Yellow_Red) %>%
-    mutate(across(Days:Color_ReHS_Yellow_Red, as.double))
+    dplyr::select(Order:ReHS, Color_ReHS:Color_ReHS_Yellow_Red) %>%
+    mutate(across(c(Days:ReHS, Color_ReHS_Yellow:Color_ReHS_Yellow_Red), as.double),
+           Color_ReHS = factor(Color_ReHS,
+                               levels = c("Green", "Yellow", "Red")))
 
 ###############################################################################
 

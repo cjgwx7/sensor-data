@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -p BioCompute,hpc3,hpc5,hpc6,htc4
+#SBATCH -p hpc3,hpc5,hpc6,htc4
 #SBATCH -n 1
 #SBATCH -c 1
 #SBATCH -A animalsci
